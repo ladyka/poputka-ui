@@ -82,15 +82,15 @@ export default function LandingPage() {
       <Hero />
       <Box sx={{ bgcolor: 'background.default' }}>
         <LogoCollection />
-        <Features />
-        <Divider />
-        <Testimonials />
-        <Divider />
-        <Highlights />
-        <Divider />
-        <Pricing />
-        <Divider />
-        <FAQ />
+        {/*<Features />*/}
+        {/*<Divider />*/}
+        {/*<Testimonials />*/}
+        {/*<Divider />*/}
+        {/*<Highlights />*/}
+        {/*<Divider />*/}
+        {/*<Pricing />*/}
+        {/*<Divider />*/}
+        {/*<FAQ />*/}
         <Divider />
         <Footer />
       </Box>
