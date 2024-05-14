@@ -102,7 +102,7 @@ export default function SignInSide() {
           <Button
             startIcon={<ArrowBackRoundedIcon />}
             component="a"
-            href="/material-ui/getting-started/templates/"
+            href="/"
           >
             Back
           </Button>

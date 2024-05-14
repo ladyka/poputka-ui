@@ -176,7 +176,7 @@ export default function SignUp() {
           <Button
             startIcon={<ArrowBackRoundedIcon />}
             component="a"
-            href="/material-ui/getting-started/templates/"
+            href="/"
           >
             Back
           </Button>
@@ -285,7 +285,7 @@ export default function SignUp() {
                 Sign up
               </Button>
               <Link
-                href="/material-ui/getting-started/templates/sign-in/"
+                href="/sign-in/"
                 variant="body2"
                 sx={{ alignSelf: 'center' }}
               >

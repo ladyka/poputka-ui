@@ -77,7 +77,7 @@ export default function Hero() {
               aria-label="Enter your email address"
               placeholder="Your email address"
               inputProps={{
-                ariaLabel: 'Enter your email address',
+                "aria-label": 'Enter your email address',
               }}
             />
             <Button variant="contained" color="primary">

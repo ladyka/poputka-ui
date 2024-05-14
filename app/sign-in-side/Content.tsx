@@ -54,7 +54,7 @@ export default function Content() {
         }}
       />
       {items.map((item) => (
-        <Stack direction="row" gap={2}>
+        <Stack direction="row" gap={2} key={Math.random()}>
           {item.icon}
           <div>
             <Typography fontWeight="medium" gutterBottom>

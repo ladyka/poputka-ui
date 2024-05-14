@@ -149,7 +149,7 @@ export default function Checkout() {
             <Button
               startIcon={<ArrowBackRoundedIcon />}
               component="a"
-              href="/material-ui/getting-started/templates/landing-page/"
+              href="/landing-page/"
               sx={{ ml: '-8px' }}
             >
               Back to
@@ -211,7 +211,7 @@ export default function Checkout() {
               <Button
                 startIcon={<ArrowBackRoundedIcon />}
                 component="a"
-                href="/material-ui/getting-started/templates/landing-page/"
+                href="/landing-page/"
                 sx={{ alignSelf: 'start' }}
               >
                 Back to
