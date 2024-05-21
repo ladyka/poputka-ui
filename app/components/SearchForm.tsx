@@ -1,0 +1,162 @@
+import * as React from 'react';
+import {Grid, Stack, alpha} from '@mui/material';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import {useState} from "react";
+import {LocalizationProvider} from "@mui/x-date-pickers";
+import dayjs, {Dayjs} from 'dayjs';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import axios from 'axios';
+import Typography from "@mui/material/Typography";
+
+export default function SearchForm() {
+
+    const [from, setFrom] = useState('');
+    const [to, setTo] = useState('');
+    const [date, setDate] = React.useState<Dayjs | null>(dayjs());
+
+    const [passengers, setPassengers] = useState(1);
+    const fetchPlaces = async (query: string) => {
+        try {
+            const response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${query}&format=json`);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching places:', error);
+            return [];
+        }
+    };
+
+    const handleSearch = () => {
+        // Действия по выполнению поиска
+        console.log(`Searching for trips from ${from} to ${to} on ${date} for ${passengers} passengers`);
+
+    };
+    return (
+        <Box
+            id="hero"
+            sx={(theme) => ({
+                width: '100%',
+                backgroundImage:
+                    theme.palette.mode === 'light'
+                        ? 'linear-gradient(180deg, #CEE5FD, #FFF)'
+                        : `linear-gradient(#02294F, ${alpha('#090E10', 0.0)})`,
+                backgroundSize: '100% 20%',
+                backgroundRepeat: 'no-repeat',
+            })}
+        >
+            <Container
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    pt: {xs: 14, sm: 20},
+                    pb: {xs: 8, sm: 12},
+                }}
+            >
+                <Stack spacing={2} useFlexGap sx={{ width: { xs: '100%', sm: '70%' },
+                    marginBottom: '40px' }}>
+                    <Typography
+                        variant="h1"
+                        sx={{
+                            display: 'flex',
+                            flexDirection: { xs: 'column', md: 'row' },
+                            alignSelf: 'center',
+                            textAlign: 'center',
+                            fontSize: 'clamp(3.5rem, 10vw, 4rem)',
+                        }}
+                    >
+                        Попутка&nbsp;
+                        <Typography
+                            component="span"
+                            variant="h1"
+                            sx={{
+                                fontSize: 'clamp(3rem, 10vw, 4rem)',
+                                color: (theme) =>
+                                    theme.palette.mode === 'light' ? 'primary.main' : 'primary.light',
+                            }}
+                        >
+                            BY
+                        </Typography>
+                    </Typography>
+                    <Typography
+                        textAlign="center"
+                        color="text.secondary"
+                        sx={{ alignSelf: 'center', width: { sm: '100%', md: '80%' } }}
+                    >
+                        Место в котором водители и попутчики находят друг-друга.
+                    </Typography>
+                </Stack>
+
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={3}>
+                        <TextField
+                            label="Откуда"
+                            value={from}
+                            onChange={async (e) => {
+                                setFrom(e.target.value)
+                                console.log(e.target.value)
+                                const query = e.target.value;
+                                const places = await fetchPlaces(query);
+                                if (places.length > 0) {
+                                    setFrom(places[0].name)
+                                }
+                            }}
+                            fullWidth
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                        <TextField
+                            label="Куда"
+                            value={to}
+                            onChange={async (e) => {
+                                setTo(e.target.value)
+                                console.log(e.target.value)
+                                const query = e.target.value;
+                                const places = await fetchPlaces(query);
+                                if (places.length > 0) {
+                                    setTo(places[0].name)
+                                }
+                            }}
+                            fullWidth
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker
+                                label="Дата"
+                                value={date}
+                                onChange={(newDate) => setDate(newDate)}
+                                disablePast
+                            />
+                        </LocalizationProvider>
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                        <TextField
+                            label="Количество человек"
+                            type="number"
+                            value={passengers}
+                            onChange={(e) => {
+                                const p = parseInt(e.target.value)
+                                if (p > 0 && p < 10) {
+                                    setPassengers(p)
+                                } else {
+                                    setPassengers(0)
+                                }
+
+                            }}
+                            fullWidth
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <Button variant="contained" color="primary" onClick={handleSearch}>
+                            Найти
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Container>
+        </Box>
+    );
+}
