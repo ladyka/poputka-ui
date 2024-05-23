@@ -22,8 +22,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" mt={1}>
       {'Copyright © '}
-      <Link href="https://poputka.by/">Sitemark&nbsp;</Link>
-      {new Date().getFullYear()}
+      <Link href="https://poputka.by/">Poputka.by&nbsp;</Link>
+      {'2024-' + new Date().getFullYear()}
     </Typography>
   );
 }
@@ -64,29 +64,29 @@ export default function Footer() {
                   alt="Poputka.by's logo"
               />
             </Box>
-            <Typography variant="body2" fontWeight={600} gutterBottom>
-              Newsletter
-            </Typography>
-            <Typography variant="body2" color="text.secondary" mb={2}>
-              Subscribe to our newsletter for weekly updates and promotions.
-            </Typography>
-            <Stack direction="row" spacing={1} useFlexGap>
-              <TextField
-                id="outlined-basic"
-                hiddenLabel
-                size="small"
-                variant="outlined"
-                fullWidth
-                aria-label="Enter your email address"
-                placeholder="Your email address"
-                inputProps={{
-                  "aria-label": 'Enter your email address',
-                }}
-              />
-              <Button variant="contained" color="primary" sx={{ flexShrink: 0 }}>
-                Subscribe
-              </Button>
-            </Stack>
+            {/*<Typography variant="body2" fontWeight={600} gutterBottom>*/}
+            {/*  Newsletter*/}
+            {/*</Typography>*/}
+            {/*<Typography variant="body2" color="text.secondary" mb={2}>*/}
+            {/*  Subscribe to our newsletter for weekly updates and promotions.*/}
+            {/*</Typography>*/}
+            {/*<Stack direction="row" spacing={1} useFlexGap>*/}
+            {/*  <TextField*/}
+            {/*    id="outlined-basic"*/}
+            {/*    hiddenLabel*/}
+            {/*    size="small"*/}
+            {/*    variant="outlined"*/}
+            {/*    fullWidth*/}
+            {/*    aria-label="Enter your email address"*/}
+            {/*    placeholder="Your email address"*/}
+            {/*    inputProps={{*/}
+            {/*      "aria-label": 'Enter your email address',*/}
+            {/*    }}*/}
+            {/*  />*/}
+            {/*  <Button variant="contained" color="primary" sx={{ flexShrink: 0 }}>*/}
+            {/*    Subscribe*/}
+            {/*  </Button>*/}
+            {/*</Stack>*/}
           </Box>
         </Box>
         <Box
@@ -96,24 +96,24 @@ export default function Footer() {
             gap: 1,
           }}
         >
-          <Typography variant="body2" fontWeight={600}>
-            Product
-          </Typography>
-          <Link color="text.secondary" href="#">
-            Features
-          </Link>
-          <Link color="text.secondary" href="#">
-            Testimonials
-          </Link>
-          <Link color="text.secondary" href="#">
-            Highlights
-          </Link>
-          <Link color="text.secondary" href="#">
-            Pricing
-          </Link>
-          <Link color="text.secondary" href="#">
-            FAQs
-          </Link>
+          {/*<Typography variant="body2" fontWeight={600}>*/}
+          {/*  Product*/}
+          {/*</Typography>*/}
+          {/*<Link color="text.secondary" href="#">*/}
+          {/*  Features*/}
+          {/*</Link>*/}
+          {/*<Link color="text.secondary" href="#">*/}
+          {/*  Testimonials*/}
+          {/*</Link>*/}
+          {/*<Link color="text.secondary" href="#">*/}
+          {/*  Highlights*/}
+          {/*</Link>*/}
+          {/*<Link color="text.secondary" href="#">*/}
+          {/*  Pricing*/}
+          {/*</Link>*/}
+          {/*<Link color="text.secondary" href="#">*/}
+          {/*  FAQs*/}
+          {/*</Link>*/}
         </Box>
         <Box
           sx={{
@@ -122,18 +122,18 @@ export default function Footer() {
             gap: 1,
           }}
         >
-          <Typography variant="body2" fontWeight={600}>
-            Company
-          </Typography>
-          <Link color="text.secondary" href="#">
-            About us
-          </Link>
-          <Link color="text.secondary" href="#">
-            Careers
-          </Link>
-          <Link color="text.secondary" href="#">
-            Press
-          </Link>
+          {/*<Typography variant="body2" fontWeight={600}>*/}
+          {/*  Company*/}
+          {/*</Typography>*/}
+          {/*<Link color="text.secondary" href="#">*/}
+          {/*  About us*/}
+          {/*</Link>*/}
+          {/*<Link color="text.secondary" href="#">*/}
+          {/*  Careers*/}
+          {/*</Link>*/}
+          {/*<Link color="text.secondary" href="#">*/}
+          {/*  Press*/}
+          {/*</Link>*/}
         </Box>
         <Box
           sx={{
@@ -142,18 +142,18 @@ export default function Footer() {
             gap: 1,
           }}
         >
-          <Typography variant="body2" fontWeight={600}>
-            Legal
-          </Typography>
-          <Link color="text.secondary" href="#">
-            Terms
-          </Link>
-          <Link color="text.secondary" href="#">
-            Privacy
-          </Link>
-          <Link color="text.secondary" href="#">
-            Contact
-          </Link>
+          {/*<Typography variant="body2" fontWeight={600}>*/}
+          {/*  Legal*/}
+          {/*</Typography>*/}
+          {/*<Link color="text.secondary" href="#">*/}
+          {/*  Terms*/}
+          {/*</Link>*/}
+          {/*<Link color="text.secondary" href="#">*/}
+          {/*  Privacy*/}
+          {/*</Link>*/}
+          {/*<Link color="text.secondary" href="#">*/}
+          {/*  Contact*/}
+          {/*</Link>*/}
         </Box>
       </Box>
       <Box
@@ -167,15 +167,15 @@ export default function Footer() {
         }}
       >
         <div>
-          <Link color="text.secondary" href="#">
-            Privacy Policy
-          </Link>
-          <Typography display="inline" sx={{ mx: 0.5, opacity: 0.5 }}>
-            &nbsp;•&nbsp;
-          </Typography>
-          <Link color="text.secondary" href="#">
-            Terms of Service
-          </Link>
+          {/*<Link color="text.secondary" href="#">*/}
+          {/*  Privacy Policy*/}
+          {/*</Link>*/}
+          {/*<Typography display="inline" sx={{ mx: 0.5, opacity: 0.5 }}>*/}
+          {/*  &nbsp;•&nbsp;*/}
+          {/*</Typography>*/}
+          {/*<Link color="text.secondary" href="#">*/}
+          {/*  Terms of Service*/}
+          {/*</Link>*/}
           <Copyright />
         </div>
         <Stack
@@ -187,30 +187,30 @@ export default function Footer() {
             color: 'text.secondary',
           }}
         >
-          <IconButton
-            color="inherit"
-            href="https://github.com/mui"
-            aria-label="GitHub"
-            sx={{ alignSelf: 'center' }}
-          >
-            <FacebookIcon />
-          </IconButton>
-          <IconButton
-            color="inherit"
-            href="https://twitter.com/MaterialUI"
-            aria-label="X"
-            sx={{ alignSelf: 'center' }}
-          >
-            <TwitterIcon />
-          </IconButton>
-          <IconButton
-            color="inherit"
-            href="https://www.linkedin.com/company/mui/"
-            aria-label="LinkedIn"
-            sx={{ alignSelf: 'center' }}
-          >
-            <LinkedInIcon />
-          </IconButton>
+          {/*<IconButton*/}
+          {/*  color="inherit"*/}
+          {/*  href="https://github.com/mui"*/}
+          {/*  aria-label="GitHub"*/}
+          {/*  sx={{ alignSelf: 'center' }}*/}
+          {/*>*/}
+          {/*  <FacebookIcon />*/}
+          {/*</IconButton>*/}
+          {/*<IconButton*/}
+          {/*  color="inherit"*/}
+          {/*  href="https://twitter.com/MaterialUI"*/}
+          {/*  aria-label="X"*/}
+          {/*  sx={{ alignSelf: 'center' }}*/}
+          {/*>*/}
+          {/*  <TwitterIcon />*/}
+          {/*</IconButton>*/}
+          {/*<IconButton*/}
+          {/*  color="inherit"*/}
+          {/*  href="https://www.linkedin.com/company/mui/"*/}
+          {/*  aria-label="LinkedIn"*/}
+          {/*  sx={{ alignSelf: 'center' }}*/}
+          {/*>*/}
+          {/*  <LinkedInIcon />*/}
+          {/*</IconButton>*/}
         </Stack>
       </Box>
     </Container>

@@ -1,6 +1,5 @@
 'use client'
 
-import { useRouter } from 'next/router';
 import * as React from 'react';
 import { PaletteMode } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -15,8 +14,6 @@ import Footer from '@/app/components/Footer';
 import getLPTheme from '@/app/getLPTheme';
 
 import Container from "@mui/material/Container";
-import Hero from "@/app/components/Hero";
-import LogoCollection from "@/app/components/LogoCollection";
 import SearchForm from '@/app/components/SearchForm';
 
 interface ToggleCustomThemeProps {
@@ -54,9 +51,11 @@ function ToggleCustomTheme({
         >
           <ToggleButton value>
             <AutoAwesomeRoundedIcon sx={{ fontSize: '20px', mr: 1 }} />
-            Custom theme
+                Дизайн 1
           </ToggleButton>
-          <ToggleButton value={false}>Material Design 2</ToggleButton>
+          <ToggleButton value={false}>
+              Дизайн 2
+          </ToggleButton>
         </ToggleButtonGroup>
       </Box>
   );
