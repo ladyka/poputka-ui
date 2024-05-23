@@ -21,15 +21,15 @@ build-and-deploy-prod:
     - set -x
     - chmod 600 $SSH_KEY_FILE
     - export SERVER_SSH_CONNECTION=ubuntu@${HOST_TARGET_PROD}
-    - yarn install
+    - npm install
     - npm install --location=global create-pwa
     - WWW_DIR=/poputka/www
   script:
-    - CI=false yarn build ;
-    - cd build ; create-pwa --icon="./android-chrome-192x192.png" --launch="./android-chrome-512x512.png" ; cd ..
-    - tar -cf bundle.tar build
+    - npm run build ;
+#    - cd out ; create-pwa --icon="./android-chrome-192x192.png" --launch="./android-chrome-512x512.png" ; cd ..
+    - tar -cf bundle.tar out
     - scp -o StrictHostKeyChecking=no -i $SSH_KEY_FILE ${CI_PROJECT_DIR}/bundle.tar ${SERVER_SSH_CONNECTION}:/tmp/
-    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY_FILE ${SERVER_SSH_CONNECTION} "cd /tmp ; tar -xf bundle.tar ; rm -rf $WWW_DIR; mv build $WWW_DIR"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY_FILE ${SERVER_SSH_CONNECTION} "cd /tmp ; tar -xf bundle.tar ; rm -rf $WWW_DIR; mv out $WWW_DIR"
 #    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY_FILE ${SERVER_SSH_CONNECTION} ""
 #    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY_FILE ${SERVER_SSH_CONNECTION} ""
 #  only:
