@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PaletteMode } from '@mui/material';
+import {MenuItem, PaletteMode} from '@mui/material';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,6 +9,8 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleColorMode from './ToggleColorMode';
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 
 const logoStyle = {
   width: '140px',
@@ -86,20 +88,23 @@ function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
                 px: 0,
               }}
             >
+                <Link href={'/'}>
               <img
                 src={'/logo.png'}
                 style={logoStyle}
-                alt="logo of poputka.by"
+                alt="logo of Poputka.by"
               />
+                </Link>
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                {/*<MenuItem*/}
-                {/*  onClick={() => scrollToSection('features')}*/}
-                {/*  sx={{ py: '6px', px: '12px' }}*/}
-                {/*>*/}
-                {/*  <Typography variant="body2" color="text.primary">*/}
-                {/*    Features*/}
-                {/*  </Typography>*/}
-                {/*</MenuItem>*/}
+                <MenuItem
+                  sx={{ py: '6px', px: '12px' }}
+                >
+                  <Typography variant="body2" color="text.primary">
+                      <Link href={"/faq"}>
+                          Помощь/FAQ
+                      </Link>
+                  </Typography>
+                </MenuItem>
                 {/*<MenuItem*/}
                 {/*  onClick={() => scrollToSection('testimonials')}*/}
                 {/*  sx={{ py: '6px', px: '12px' }}*/}
@@ -192,9 +197,11 @@ function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
                   >
                     <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
                   </Box>
-                  {/*<MenuItem onClick={() => scrollToSection('features')}>*/}
-                  {/*  Features*/}
-                  {/*</MenuItem>*/}
+                  <MenuItem>
+                      <Link href={"/faq"}>
+                          Помощь/FAQ
+                      </Link>
+                  </MenuItem>
                   {/*<MenuItem onClick={() => scrollToSection('testimonials')}>*/}
                   {/*  Testimonials*/}
                   {/*</MenuItem>*/}

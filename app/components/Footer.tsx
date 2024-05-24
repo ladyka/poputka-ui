@@ -96,12 +96,12 @@ export default function Footer() {
             gap: 1,
           }}
         >
-          {/*<Typography variant="body2" fontWeight={600}>*/}
-          {/*  Product*/}
-          {/*</Typography>*/}
-          {/*<Link color="text.secondary" href="#">*/}
-          {/*  Features*/}
-          {/*</Link>*/}
+          <Typography variant="body2" fontWeight={600}>
+            Продукт
+          </Typography>
+          <Link color="text.secondary" href={"/faq"}>
+            Помощь/FAQ
+          </Link>
           {/*<Link color="text.secondary" href="#">*/}
           {/*  Testimonials*/}
           {/*</Link>*/}
