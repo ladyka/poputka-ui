@@ -1,5 +1,8 @@
 import * as React from 'react';
-import {Grid, Stack, alpha} from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import Autocomplete from '@mui/material/Autocomplete';
+import {alpha} from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import TextField from "@mui/material/TextField";
@@ -9,30 +12,24 @@ import {LocalizationProvider} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from 'dayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import axios from 'axios';
 import Typography from "@mui/material/Typography";
+import {useRouter} from "next/navigation";
 
 export default function SearchForm() {
-
-    const [from, setFrom] = useState('');
-    const [to, setTo] = useState('');
+    const belarus_cities_ru = ["Барановичи","Барань","Белоозёрск","Белыничи","Березино","Берёза","Берёзовка","Бобруйск","Борисов","Браслав","Брест","Буда-Кошелёво","Быхов","Василевичи","Верхнедвинск","Ветка","Вилейка","Витебск","Волковыск","Воложин","Высокое","Ганцевичи","Глубокое","Гомель","Горка","Горки","Городок","Гродно","Давид-Городок","Дзержинск","Дисна","Добруш","Докшицы","Дороги","Дрогичин","Дубровно","Дятлово","Ельск","Жабинка","Житковичи","Жлобин","Жодино","Заславль","Иваново","Ивацевичи","Ивье","Калинковичи","Каменец","Кировск","Клецк","Климовичи","Кличев","Кобрин","Копыль","Коссово","Костюковичи","Кричев","Круглое","Крупки","Лепель","Лида","Логойск","Лунинец","Любань","Ляховичи","Малорита","Микашевичи","Минск","Миоры","Могилёв","Мозырь","Молодечно","Мосты","Мстиславль","Мядель","Наровля","Несвиж","Новогрудок","Новолукомль","Новополоцк","Орша","Осиповичи","Островец","Ошмяны","Петриков","Пинск","Полоцк","Поставы","Пружаны","Речица","Рогачёв","Светлогорск","Свислочь","Сенно","Скидель","Славгород","Слоним","Слуцк","Смолевичи","Сморгонь","Солигорск","Столбцы","Столин","Толочин","Туров","Узда","Фаниполь","Хойники","Чаусы","Чашники","Червень","Чериков","Чечерск","Шклов","Щучин"]
+    const [from, setFrom] = useState<string|null>('');
+    const [to, setTo] = useState<string|null>('');
     const [date, setDate] = React.useState<Dayjs | null>(dayjs());
 
     const [passengers, setPassengers] = useState(1);
-    const fetchPlaces = async (query: string) => {
-        try {
-            const response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${query}&format=json`);
-            return response.data;
-        } catch (error) {
-            console.error('Error fetching places:', error);
-            return [];
-        }
-    };
-
+    const router = useRouter();
     const handleSearch = () => {
         // Действия по выполнению поиска
         console.log(`Searching for trips from ${from} to ${to} on ${date} for ${passengers} passengers`);
-
+        if ((from && from.trim().length > 0) && (to && to.trim().length > 0)) {
+            const url = `/ride-sharing/${from}/${to}`
+            router.push(url);
+        }
     };
     return (
         <Box
@@ -92,35 +89,23 @@ export default function SearchForm() {
 
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={3}>
-                        <TextField
-                            label="Откуда"
+                        <Autocomplete
                             value={from}
-                            onChange={async (e) => {
-                                setFrom(e.target.value)
-                                console.log(e.target.value)
-                                const query = e.target.value;
-                                const places = await fetchPlaces(query);
-                                if (places.length > 0) {
-                                    setFrom(places[0].name)
-                                }
+                            onChange={(event: any, newValue: string | null) => {
+                                setFrom(newValue);
                             }}
-                            fullWidth
+                            options={belarus_cities_ru}
+                            renderInput={(params) => <TextField {...params} label="Откуда" fullWidth/>}
                         />
                     </Grid>
                     <Grid item xs={12} sm={3}>
-                        <TextField
-                            label="Куда"
+                        <Autocomplete
                             value={to}
-                            onChange={async (e) => {
-                                setTo(e.target.value)
-                                console.log(e.target.value)
-                                const query = e.target.value;
-                                const places = await fetchPlaces(query);
-                                if (places.length > 0) {
-                                    setTo(places[0].name)
-                                }
+                            onChange={(event: any, newValue: string | null) => {
+                                setTo(newValue);
                             }}
-                            fullWidth
+                            options={belarus_cities_ru}
+                            renderInput={(params) => <TextField {...params} label="Откуда" fullWidth/>}
                         />
                     </Grid>
                     <Grid item xs={12} sm={3}>
@@ -150,8 +135,10 @@ export default function SearchForm() {
                             fullWidth
                         />
                     </Grid>
+                </Grid>
+                <Grid>
                     <Grid item xs={12} sm={12}>
-                        <Button variant="contained" color="primary" onClick={handleSearch}>
+                        <Button variant="contained" color="primary" onClick={handleSearch} sx={{ width: '100%', margin: '10px'}}>
                             Найти
                         </Button>
                     </Grid>
