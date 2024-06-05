@@ -32,7 +32,7 @@ export default function Home() {
       <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
         <CssBaseline />
         <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
-        <SearchForm />
+        <SearchForm from_default={''} to_default={''} />
         <Box sx={{ bgcolor: 'background.default' }}>
           <Container
               sx={{

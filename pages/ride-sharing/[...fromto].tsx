@@ -36,8 +36,7 @@ export default function RideSharing() {
             <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
                 <CssBaseline />
                 <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
-                {/*<SearchForm from={from} to={to}/>*/}
-                <SearchForm/>
+                <SearchForm from_default={from} to_default={to}/>
                 <Box sx={{ bgcolor: 'background.default' }}>
                     <Container
                         sx={{
