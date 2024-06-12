@@ -1,0 +1,10 @@
+{
+  "email" : "Email",
+  "forward_main_page" : "Main page",
+  "help_faq": "help/FAQ",
+  "password" :  "Password",
+  "password_forgot" : "Forgot your password?",
+  "sign_in": "Sign in",
+  "sign_up": "Sign up",
+  "sing_in_have_not_account" :  "Don&apos;t have an account? Sign up"
+}

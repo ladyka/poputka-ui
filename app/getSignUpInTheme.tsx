@@ -214,7 +214,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
   },
 });
 
-export default function getSignUpTheme(mode: PaletteMode): ThemeOptions {
+export default function getSignUpInTheme(mode: PaletteMode): ThemeOptions {
   return {
     ...getDesignTokens(mode),
     components: {

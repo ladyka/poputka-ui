@@ -20,9 +20,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 
-import getSignUpTheme from './getSignUpTheme';
+import getSignUpInTheme from '../getSignUpInTheme';
 import ToggleColorMode from './ToggleColorMode';
-import { GoogleIcon, FacebookIcon, SitemarkIcon } from './CustomIcons';
+import {GoogleIcon, FacebookIcon, PoputkaByIcon} from '../components/CustomIcons';
 
 interface ToggleCustomThemeProps {
   showCustomTheme: Boolean;
@@ -71,7 +71,7 @@ export default function SignUp() {
   const [mode, setMode] = React.useState<PaletteMode>('light');
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
   const defaultTheme = createTheme({ palette: { mode } });
-  const SignUpTheme = createTheme(getSignUpTheme(mode));
+  const SignUpTheme = createTheme(getSignUpInTheme(mode));
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
@@ -200,7 +200,7 @@ export default function SignUp() {
                   : 'rgba(0, 0, 0, 0.5) 0px 5px 15px 0px, rgba(25, 28, 33, 0.08) 0px 15px 35px -5px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px',
             })}
           >
-            <SitemarkIcon sx={{ width: 100 }} />
+            <PoputkaByIcon sx={{ width: 100 }} />
             <Typography
               component="h1"
               variant="h4"

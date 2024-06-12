@@ -14,7 +14,7 @@ import Container from "@mui/material/Container";
 import SearchForm from '@/app/components/SearchForm';
 import {ToggleCustomTheme} from "@/app/customThemeService";
 
-export default function Home() {
+const Home = () => {
   const [mode, setMode] = React.useState<PaletteMode>('light');
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
@@ -32,7 +32,7 @@ export default function Home() {
       <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
         <CssBaseline />
         <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
-        <SearchForm from_default={''} to_default={''} />
+        <SearchForm from_default={'Минск'} to_default={'Молодечно'} />
         <Box sx={{ bgcolor: 'background.default' }}>
           <Container
               sx={{
@@ -55,3 +55,5 @@ export default function Home() {
       </ThemeProvider>
   );
 }
+
+export default Home

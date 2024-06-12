@@ -7,12 +7,12 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import OutlinedInput from '@mui/material/OutlinedInput';
 
-interface ForgotPasswordProps {
+interface InvalidEmailOrPasswordProps {
   open: boolean;
   handleClose: () => void;
 }
 
-export default function ForgotPassword({ open, handleClose }: ForgotPasswordProps) {
+export default function InvalidEmailOrPassword({ open, handleClose }: InvalidEmailOrPasswordProps) {
   return (
     <Dialog
       open={open}
@@ -25,31 +25,16 @@ export default function ForgotPassword({ open, handleClose }: ForgotPasswordProp
         },
       }}
     >
-      <DialogTitle>Reset password</DialogTitle>
+      <DialogTitle>Ваш емеил или пароль не верны</DialogTitle>
       <DialogContent
         sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%' }}
       >
         <DialogContentText>
-          Enter your account&apos;s email address, and we&apos;ll send you a link to
-          reset your password.
+          Ваш адрес электронной почты или пароль не верны, проверьте данные и повторите попытку.
         </DialogContentText>
-        <OutlinedInput
-          autoFocus
-          required
-          margin="dense"
-          id="email"
-          name="email"
-          label="Email address"
-          placeholder="Email address"
-          type="email"
-          fullWidth
-        />
       </DialogContent>
       <DialogActions sx={{ pb: 3, px: 3 }}>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button variant="contained" type="submit">
-          Continue
-        </Button>
+        <Button onClick={handleClose}>Понятно</Button>
       </DialogActions>
     </Dialog>
   );
