@@ -1,17 +1,17 @@
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import * as React from 'react';
-import { PaletteMode } from '@mui/material';
+import {PaletteMode} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
 import AppAppBar from '@/app/components/AppAppBar';
 import Footer from '@/app/components/Footer';
 import getLPTheme from '@/app/getLPTheme';
 
 import TripView from "@/app/trip/TripView";
 import useTripGetService from "@/app/services/TripService";
-import {TripCompanionView} from "@/app/dti/TripCompanionView";
+import {TripCompanion} from "@/app/dti/TripCompanion";
 import Container from "@mui/material/Container";
 import {ToggleCustomTheme} from "@/app/customThemeService";
 
@@ -47,7 +47,7 @@ export default function TripIdPage() {
     const { id } = router.query;
     const tripId = typeof id === 'string' ? id : '-1'
     let tripGetService = useTripGetService()
-    let trip: TripCompanionView = tripGetService(tripId);
+    let trip: TripCompanion = tripGetService(tripId);
     trip.price = cyrb53(tripId) % 1000
     return (
         <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
@@ -65,19 +65,7 @@ export default function TripIdPage() {
                 >
                     <TripView trip={trip}/>
                 </Container>
-
-                {/*<LogoCollection />*/}
-                {/*<Features />*/}
-                {/*<Divider />*/}
-                {/*<Testimonials />*/}
-                {/*<Divider />*/}
-                {/*<Highlights />*/}
-                {/*<Divider />*/}
-                {/*<Pricing />*/}
-                {/*<Divider />*/}
-
                 <Divider />
-
             </Box>
             <Footer />
             <ToggleCustomTheme

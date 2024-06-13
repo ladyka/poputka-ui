@@ -1,19 +1,17 @@
 import * as React from 'react';
+import {useState} from 'react';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import Autocomplete from '@mui/material/Autocomplete';
 import {alpha} from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import {useState} from "react";
-import {LocalizationProvider} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from 'dayjs';
-import {DatePicker} from '@mui/x-date-pickers/DatePicker';
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import Typography from "@mui/material/Typography";
 import {useRouter} from "next/navigation";
+import CityAutocompleteInputField from "@/app/components/CityAutocompleteInputField";
+import TripDatePicker from "@/app/components/TripDatePicker";
 
 interface SearchFormProps {
     from_default: string
@@ -21,9 +19,8 @@ interface SearchFormProps {
 }
 
 export default function SearchForm({from_default, to_default} : SearchFormProps) {
-    const belarus_cities_ru = ["Барановичи","Барань","Белоозёрск","Белыничи","Березино","Берёза","Берёзовка","Бобруйск","Борисов","Браслав","Брест","Буда-Кошелёво","Быхов","Василевичи","Верхнедвинск","Ветка","Вилейка","Витебск","Волковыск","Воложин","Высокое","Ганцевичи","Глубокое","Гомель","Горка","Горки","Городок","Гродно","Давид-Городок","Дзержинск","Дисна","Добруш","Докшицы","Дороги","Дрогичин","Дубровно","Дятлово","Ельск","Жабинка","Житковичи","Жлобин","Жодино","Заславль","Иваново","Ивацевичи","Ивье","Калинковичи","Каменец","Кировск","Клецк","Климовичи","Кличев","Кобрин","Копыль","Коссово","Костюковичи","Кричев","Круглое","Крупки","Лепель","Лида","Логойск","Лунинец","Любань","Ляховичи","Малорита","Микашевичи","Минск","Миоры","Могилёв","Мозырь","Молодечно","Мосты","Мстиславль","Мядель","Наровля","Несвиж","Новогрудок","Новолукомль","Новополоцк","Орша","Осиповичи","Островец","Ошмяны","Петриков","Пинск","Полоцк","Поставы","Пружаны","Речица","Рогачёв","Светлогорск","Свислочь","Сенно","Скидель","Славгород","Слоним","Слуцк","Смолевичи","Сморгонь","Солигорск","Столбцы","Столин","Толочин","Туров","Узда","Фаниполь","Хойники","Чаусы","Чашники","Червень","Чериков","Чечерск","Шклов","Щучин"]
-    const [from, setFrom] = useState<string|null>(from_default);
-    const [to, setTo] = useState<string|null>(to_default);
+    const [from, setFrom] = useState<string>(from_default);
+    const [to, setTo] = useState<string>(to_default);
     const [date, setDate] = React.useState<Dayjs | null>(dayjs());
 
     const [passengers, setPassengers] = useState(1);
@@ -38,7 +35,6 @@ export default function SearchForm({from_default, to_default} : SearchFormProps)
     };
     return (
         <Box
-            id="hero"
             sx={(theme) => ({
                 width: '100%',
                 backgroundImage:
@@ -94,34 +90,13 @@ export default function SearchForm({from_default, to_default} : SearchFormProps)
 
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={3}>
-                        <Autocomplete
-                            value={from}
-                            onChange={(event: any, newValue: string | null) => {
-                                setFrom(newValue);
-                            }}
-                            options={belarus_cities_ru}
-                            renderInput={(params) => <TextField {...params} label="Откуда" fullWidth/>}
-                        />
+                        <CityAutocompleteInputField city={from} setCity={setFrom} labelText={"Откуда"}/>
                     </Grid>
                     <Grid item xs={12} sm={3}>
-                        <Autocomplete
-                            value={to}
-                            onChange={(event: any, newValue: string | null) => {
-                                setTo(newValue);
-                            }}
-                            options={belarus_cities_ru}
-                            renderInput={(params) => <TextField {...params} label="Откуда" fullWidth/>}
-                        />
+                        <CityAutocompleteInputField city={to} setCity={setTo} labelText={"Куда"}/>
                     </Grid>
                     <Grid item xs={12} sm={3}>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker
-                                label="Дата"
-                                value={date}
-                                onChange={(newDate) => setDate(newDate)}
-                                disablePast
-                            />
-                        </LocalizationProvider>
+                        <TripDatePicker date={date} setDate={setDate} label={"Дата"}/>
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <TextField

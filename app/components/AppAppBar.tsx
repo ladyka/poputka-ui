@@ -109,6 +109,15 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                     sx={{py: '6px', px: '12px'}}
                                 >
                                     <Typography variant="body2" color="text.primary">
+                                        <Link href={"/trip"}>
+                                            Создать новую поездку
+                                        </Link>
+                                    </Typography>
+                                </MenuItem>
+                                <MenuItem
+                                    sx={{py: '6px', px: '12px'}}
+                                >
+                                    <Typography variant="body2" color="text.primary">
                                         <Link href={"/faq"}>
                                             {t(Labels.helpFAQ)}
                                         </Link>
@@ -207,6 +216,11 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                         <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode}/>
                                     </Box>
                                     <MenuItem>
+                                        <Link href={"/trip"}>
+                                            Создать новую поездку
+                                        </Link>
+                                    </MenuItem>
+                                    <MenuItem>
                                         <Link href={"/faq"}>
                                             {t(Labels.helpFAQ)}
                                         </Link>
@@ -220,7 +234,6 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                     {/*<MenuItem onClick={() => scrollToSection('pricing')}>*/}
                                     {/*  Pricing*/}
                                     {/*</MenuItem>*/}
-                                    {/*<MenuItem onClick={() => scrollToSection('faq')}>FAQ</MenuItem>*/}
                                     <Divider/>
                                     <MenuItem>
                                         <Button

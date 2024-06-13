@@ -27,17 +27,15 @@ export function PoputkaByIcon({sx}: IconProps) {
                     <title>background</title>
                     <rect fill="#fff" id="canvas_background" height="81" width="582" y="-1" x="-1"/>
                     <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
-                        <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+                        <rect fill="url(#gridpattern)" y="0" x="0" height="100%" width="100%"/>
                     </g>
                 </g>
                 <g>
                     <title>Layer 1</title>
                     <text stroke="#000"
                           transform="matrix(3.744947671890259,0,0,3.6682066917419434,-9.607316851615906,-12.220713425734857) "
-                          text-anchor="start"
-                          font-family="Helvetica, Arial, sans-serif"
-                          font-size="24"
-                          id="svg_1" y="26.4375" x="3.5" stroke-width="0" fill="#000000">POPUTKA.BY</text>
+                          id="svg_1" y="26.4375" x="3.5" fill="#000000">POPUTKA.BY
+                    </text>
                 </g>
             </svg>
         </SvgIcon>

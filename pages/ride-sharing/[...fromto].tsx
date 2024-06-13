@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import * as React from 'react';
-import { PaletteMode } from '@mui/material';
+import {PaletteMode} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
 import AppAppBar from '@/app/components/AppAppBar';
 import Footer from '@/app/components/Footer';
 import getLPTheme from '@/app/getLPTheme';
@@ -48,7 +48,7 @@ export default function RideSharing() {
                         }}
                     >
                         <h1>
-                            Поездка из {from} в {to}
+                            Список поездок из {from} в {to}
                         </h1>
                     </Container>
                     <Divider />

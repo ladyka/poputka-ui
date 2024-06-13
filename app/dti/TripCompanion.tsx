@@ -1,10 +1,15 @@
-export interface TripCompanionView {
+import {Dayjs} from "dayjs";
+
+export interface TripCompanion {
     id: string;
     from: string;
     to: string;
-    startDateTimeGMT: Date;
+    date: Dayjs;
+    time: Dayjs;
     price: number;
     currency: string;
+    car: string;
     description: string;
+    passengers: number;
     driverName: string;
 }
