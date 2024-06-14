@@ -1,4 +1,6 @@
 import {TripCompanion} from "@/app/dti/TripCompanion";
+import {NEW_TRIP_ID} from "@/pages/trip";
+import * as React from "react";
 
 interface TripViewProps {
     trip: TripCompanion;
@@ -6,14 +8,15 @@ interface TripViewProps {
 
 const TripView = ({trip}: TripViewProps) => {
     return (<>
-        <h3>Информация о поездке {trip.id}</h3>
+
+        {trip.id !== NEW_TRIP_ID && (<h2>Информация о поездке {trip.id}</h2>)}
+        {trip.id === NEW_TRIP_ID && (<h2>Информация о новой поездке</h2>)}
         <br/>
         Отправление: {trip.from}<br/>
         Пункт назначения: {trip.to}<br/>
         Стоимость: {trip.price} {trip.currency}<br/>
         <br/>
-        Дата отправления {trip.date.toString()}<br/>
-        Время отправления {trip.time.toJSON()}<br/>
+        Дата и время отправления {trip.start.toString()}<br/>
         Пассажиры {trip.passengers}<br/>
         Комментарии {trip.description}<br/>
         Водитель : {trip.driverName}<br/>

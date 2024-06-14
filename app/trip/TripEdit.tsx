@@ -15,20 +15,22 @@ import CityAutocompleteInputField from "@/app/components/CityAutocompleteInputFi
 import TripDatePicker from "@/app/components/TripDatePicker";
 import TripTimePicker from "@/app/components/TripTimePicker";
 import CurrencyRadioButtonsGroup from "../components/CurrencyRadioButtonsGroup";
-import {Dayjs} from "dayjs";
+import dayjs, {Dayjs} from "dayjs";
 
 interface TripEditProps {
-    trip: TripCompanion;
-    setEditMode: any;
+    trip: TripCompanion,
+    setEditMode: any,
+    setTrip: any,
 }
 
 const TripEdit = (p: TripEditProps) => {
     const trip = p.trip
     const setEditMode = p.setEditMode
+    const setTrip = p.setTrip
     const [from, setFrom] = useState<string>(trip.from);
     const [to, setTo] = useState<string>(trip.to);
-    const [date, setDate] = React.useState<Dayjs>(trip.date);
-    const [time, setTime] = useState(trip.time);
+    const [date, setDate] = React.useState<Dayjs>(trip.start);
+    const [time, setTime] = useState(trip.start);
     const [passengers, setPassengers] = useState(trip.passengers);
     const [currency, setCurrency] = useState(trip.currency);
     const [description, setDescription] = useState(trip.description);
@@ -37,12 +39,18 @@ const TripEdit = (p: TripEditProps) => {
     function handleSubmit() {
         trip.from = from
         trip.to = to
-        trip.date = date
-        trip.time = time
+        trip.start = dayjs()
+            .set('year', date.year())
+            .set('month', date.month())
+            .set('date', date.date())
+            .set('hour', time.hour())
+            .set('minute', time.minute())
+            .set('second', 0)
         trip.passengers = passengers
         trip.currency = currency
         trip.description = description
         trip.price = price
+        setTrip(trip)
         setEditMode(false)
     }
 

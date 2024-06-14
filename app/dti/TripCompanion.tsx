@@ -1,11 +1,10 @@
 import {Dayjs} from "dayjs";
 
 export interface TripCompanion {
-    id: string;
+    id: number;
     from: string;
     to: string;
-    date: Dayjs;
-    time: Dayjs;
+    start: Dayjs;
     price: number;
     currency: string;
     car: string;

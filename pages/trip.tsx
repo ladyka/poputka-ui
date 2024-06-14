@@ -1,5 +1,6 @@
 'use client'
 import * as React from 'react';
+import {useState} from 'react';
 import {alpha, PaletteMode} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -19,7 +20,7 @@ import Button from "@mui/material/Button";
 import {useTripEditService} from "@/app/services/TripService";
 import {useRouter} from "next/router";
 
-export const NEW_TRIP_ID = "new"
+export const NEW_TRIP_ID = -1
 
 export default function NewTrip() {
     const [mode, setMode] = React.useState<PaletteMode>('light');
@@ -40,9 +41,8 @@ export default function NewTrip() {
     const tripEditService = useTripEditService()
     const router = useRouter();
 
-    const editTrip: TripCompanion = {
-        date: dayjs(),
-        time: dayjs().set('minute', 0).set('hours', dayjs().hour() + 1),
+    const [editTrip, setEditTrip] = useState<TripCompanion>({
+        start: dayjs().set('minute', 0).set('hours', dayjs().hour() + 1),
         car: "",
         currency: "BYN",
         description: "",
@@ -52,8 +52,8 @@ export default function NewTrip() {
         to: "Молодечно",
         passengers: 3,
         driverName: "You"
+    })
 
-    };
     return (
         <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
             <CssBaseline/>
@@ -79,7 +79,7 @@ export default function NewTrip() {
                             pb: {xs: 8, sm: 12},
                         }}
                     >
-                        {editMode && (<TripEdit trip={editTrip} setEditMode={setEditMode}/>)}
+                        {editMode && (<TripEdit trip={editTrip} setEditMode={setEditMode} setTrip={setEditTrip}/>)}
                         {!editMode && (
                             <>
                                 <TripView trip={editTrip}/>
