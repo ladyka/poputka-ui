@@ -7,4 +7,5 @@ export class Labels {
     static sing_in_have_not_account: string = 'sing_in_have_not_account';
     static singIn: string = 'sing_in';
     static singUp: string = 'sing_up';
+    static please_enter_a_valid_email_address: string = 'please_enter_a_valid_email_address';
 }

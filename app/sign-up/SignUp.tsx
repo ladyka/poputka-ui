@@ -1,73 +1,29 @@
 import * as React from 'react';
+import {useState} from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import Checkbox from '@mui/material/Checkbox';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import { alpha, PaletteMode } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
+import {alpha, PaletteMode} from '@mui/material';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
-
 import getSignUpInTheme from '../getSignUpInTheme';
 import ToggleColorMode from './ToggleColorMode';
-import {GoogleIcon, FacebookIcon, PoputkaByIcon} from '../components/CustomIcons';
-
-interface ToggleCustomThemeProps {
-  showCustomTheme: Boolean;
-  toggleCustomTheme: () => void;
-}
-
-function ToggleCustomTheme({
-  showCustomTheme,
-  toggleCustomTheme,
-}: ToggleCustomThemeProps) {
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '100dvw',
-        position: 'fixed',
-        bottom: 24,
-      }}
-    >
-      <ToggleButtonGroup
-        color="primary"
-        exclusive
-        value={showCustomTheme}
-        onChange={toggleCustomTheme}
-        aria-placeholder="Platform"
-        sx={{
-          backgroundColor: 'background.default',
-          '& .Mui-selected': {
-            pointerEvents: 'none',
-          },
-        }}
-      >
-        <ToggleButton value>
-          <AutoAwesomeRoundedIcon sx={{ fontSize: '20px', mr: 1 }} />
-          Custom theme
-        </ToggleButton>
-        <ToggleButton value={false}>Material Design 2</ToggleButton>
-      </ToggleButtonGroup>
-    </Box>
-  );
-}
+import {PoputkaByIcon} from '../components/CustomIcons';
+import {ToggleCustomTheme} from "@/app/customThemeService";
+import {useSingUpService} from "@/app/services/UserAuthService";
+import {SingUpRequest} from "@/app/dti/SingUpRequest";
+import SingUpThanks from "@/app/sign-up/SingUpThanks";
+import {useRouter} from "next/navigation";
 
 export default function SignUp() {
+  const router = useRouter()
   const [mode, setMode] = React.useState<PaletteMode>('light');
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
   const defaultTheme = createTheme({ palette: { mode } });
@@ -80,6 +36,7 @@ export default function SignUp() {
   const [nameErrorMessage, setNameErrorMessage] = React.useState('');
   const [lastNameError, setLastNameError] = React.useState(false);
   const [lastNameErrorMessage, setLastNameErrorMessage] = React.useState('');
+  const [openSingUpThanks, setOpenSingUpThanks] = useState<boolean>(false)
 
   const validateInputs = () => {
     const email = document.getElementById('email') as HTMLInputElement;
@@ -91,7 +48,8 @@ export default function SignUp() {
 
     if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
       setEmailError(true);
-      setEmailErrorMessage('Please enter a valid email address.');
+      // setEmailErrorMessage('Please enter a valid email address.');
+      setEmailErrorMessage('Введите корректный email адрес');
       isValid = false;
     } else {
       setEmailError(false);
@@ -136,6 +94,8 @@ export default function SignUp() {
     setShowCustomTheme((prev) => !prev);
   };
 
+  const singUpService = useSingUpService()
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -145,8 +105,25 @@ export default function SignUp() {
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    const signUpData: SingUpRequest = {
+      email: data.get('email') as string,
+      password: data.get('password') as string,
+      name: data.get('name') as string,
+      surname: data.get('lastName') as string,
+    };
+    singUpService(signUpData)
+        .then(value => {
+          if (value.data.success) {
+            setOpenSingUpThanks(true)
+          }
+        });
   };
 
+  const handleCloseSingUpThanks = () => {
+    setOpenSingUpThanks(false)
+    router.push("/sing-in")
+  }
   return (
     <ThemeProvider theme={showCustomTheme ? SignUpTheme : defaultTheme}>
       <CssBaseline />
@@ -272,10 +249,10 @@ export default function SignUp() {
                   color={passwordError ? 'error' : 'primary'}
                 />
               </FormControl>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive updates via email."
-              />
+              {/*<FormControlLabel*/}
+              {/*  control={<Checkbox value="allowExtraEmails" color="primary" />}*/}
+              {/*  label="I want to receive updates via email."*/}
+              {/*/>*/}
               <Button
                 type="submit"
                 fullWidth
@@ -292,30 +269,32 @@ export default function SignUp() {
                 Already have an account? Sign in
               </Link>
             </Box>
-            <Divider>
-              <Typography color="text.secondary">or</Typography>
-            </Divider>
+            {/*<Divider>*/}
+            {/*  <Typography color="text.secondary">or</Typography>*/}
+            {/*</Divider>*/}
+            <SingUpThanks open={openSingUpThanks}
+                          handleClose={handleCloseSingUpThanks}/>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="outlined"
-                color="secondary"
-                onClick={() => alert('Sign up with Google')}
-                startIcon={<GoogleIcon />}
-              >
-                Sign up with Google
-              </Button>
-              <Button
-                type="submit"
-                fullWidth
-                variant="outlined"
-                color="secondary"
-                onClick={() => alert('Sign up with Facebook')}
-                startIcon={<FacebookIcon />}
-              >
-                Sign up with Facebook
-              </Button>
+              {/*<Button*/}
+              {/*  type="submit"*/}
+              {/*  fullWidth*/}
+              {/*  variant="outlined"*/}
+              {/*  color="secondary"*/}
+              {/*  onClick={() => alert('Sign up with Google')}*/}
+              {/*  startIcon={<GoogleIcon />}*/}
+              {/*>*/}
+              {/*  Sign up with Google*/}
+              {/*</Button>*/}
+              {/*<Button*/}
+              {/*  type="submit"*/}
+              {/*  fullWidth*/}
+              {/*  variant="outlined"*/}
+              {/*  color="secondary"*/}
+              {/*  onClick={() => alert('Sign up with Facebook')}*/}
+              {/*  startIcon={<FacebookIcon />}*/}
+              {/*>*/}
+              {/*  Sign up with Facebook*/}
+              {/*</Button>*/}
             </Box>
           </Card>
         </Stack>

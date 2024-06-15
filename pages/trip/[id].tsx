@@ -50,7 +50,7 @@ export default function TripIdPage() {
             .catch(reason => {
                 console.error(reason)
             });
-    })
+    }, [tripId])
 
     return (
         <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import {MenuItem, PaletteMode} from '@mui/material';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
@@ -13,6 +14,8 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import {Labels} from "@/app/components/labels";
 import {logoStyle} from "@/app/components/CustomIcons";
+import {useUserInfoService} from "@/app/services/UserAuthService";
+import {UserInfo} from "@/app/dti/UserInfo";
 
 interface AppAppBarProps {
     mode: PaletteMode;
@@ -21,10 +24,37 @@ interface AppAppBarProps {
 
 function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
     const [open, setOpen] = React.useState(false);
-
+    const userInfoService = useUserInfoService()
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
     };
+
+    const [auth, setAuth] = useState<boolean>(false)
+    const [userInfo, setUserInfo] = useState<UserInfo>({
+        birthday: "",
+        businessActivity: "",
+        car: "",
+        description: "",
+        email: "",
+        music: "",
+        name: "",
+        surname: ""
+    })
+    const [name, setName] = useState<string>("")
+    const [surname, setSurname] = useState<string>("")
+
+    useEffect(() => {
+        userInfoService()
+            .then(value => {
+                setAuth(true)
+                setUserInfo(value.data)
+                setName(value.data.name)
+                setSurname(value.data.surname)
+            })
+            .catch(reason => {
+                console.error(reason)
+            })
+    }, [name, surname]);
 
     // const { t } = useTranslation();
     const t = (label: string) => {
@@ -108,11 +138,11 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                 <MenuItem
                                     sx={{py: '6px', px: '12px'}}
                                 >
-                                    <Typography variant="body2" color="text.primary">
+                                    {auth && (<Typography variant="body2" color="text.primary">
                                         <Link href={"/trip"}>
                                             Создать новую поездку
                                         </Link>
-                                    </Typography>
+                                    </Typography>)}
                                 </MenuItem>
                                 <MenuItem
                                     sx={{py: '6px', px: '12px'}}
@@ -165,7 +195,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                             }}
                         >
                             <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode}/>
-                            <Button
+                            {!auth && (<Button
                                 color="primary"
                                 variant="text"
                                 size="small"
@@ -174,8 +204,8 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                 // target="_blank"
                             >
                                 {t(Labels.singIn)}
-                            </Button>
-                            <Button
+                            </Button>)}
+                            {!auth && (<Button
                                 color="primary"
                                 variant="contained"
                                 size="small"
@@ -184,7 +214,19 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                 // target="_blank"
                             >
                                 {t(Labels.singUp)}
-                            </Button>
+                            </Button>)}
+
+                            {auth && (<Button
+                                color="primary"
+                                variant="contained"
+                                size="small"
+                                component="a"
+                                href="/profile/"
+                                // target="_blank"
+                            >
+                                Добро пожаловать, {name} {surname}
+                            </Button>)}
+
                         </Box>
                         <Box sx={{display: {sm: '', md: 'none'}}}>
                             <Button
@@ -216,9 +258,9 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                         <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode}/>
                                     </Box>
                                     <MenuItem>
-                                        <Link href={"/trip"}>
+                                        {auth && (<Link href={"/trip"}>
                                             Создать новую поездку
-                                        </Link>
+                                        </Link>)}
                                     </MenuItem>
                                     <MenuItem>
                                         <Link href={"/faq"}>
@@ -235,7 +277,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                     {/*  Pricing*/}
                                     {/*</MenuItem>*/}
                                     <Divider/>
-                                    <MenuItem>
+                                    {!auth && (<MenuItem>
                                         <Button
                                             color="primary"
                                             variant="contained"
@@ -246,8 +288,8 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                         >
                                             {t(Labels.singUp)}
                                         </Button>
-                                    </MenuItem>
-                                    <MenuItem>
+                                    </MenuItem>)}
+                                    {!auth && (<MenuItem>
                                         <Button
                                             color="primary"
                                             variant="outlined"
@@ -258,7 +300,19 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                         >
                                             {t(Labels.singIn)}
                                         </Button>
-                                    </MenuItem>
+                                    </MenuItem>)}
+                                    {!auth && (<MenuItem>
+                                        <Button
+                                            color="primary"
+                                            variant="outlined"
+                                            component="a"
+                                            href="/profile/"
+                                            target="_blank"
+                                            sx={{width: '100%'}}
+                                        >
+                                            Добро пожаловать, {name} {surname}
+                                        </Button>
+                                    </MenuItem>)}
                                 </Box>
                             </Drawer>
                         </Box>
