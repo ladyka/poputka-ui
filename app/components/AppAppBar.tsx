@@ -46,10 +46,13 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
     useEffect(() => {
         userInfoService()
             .then(value => {
-                setAuth(true)
-                setUserInfo(value.data)
-                setName(value.data.name)
-                setSurname(value.data.surname)
+                const data = value.data
+                if (data.email?.length > 3) {
+                    setAuth(true)
+                    setUserInfo(data)
+                    setName(data.name)
+                    setSurname(data.surname)
+                }
             })
             .catch(reason => {
                 console.error(reason)
