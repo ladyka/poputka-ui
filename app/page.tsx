@@ -1,11 +1,11 @@
 'use client'
 
 import * as React from 'react';
-import { PaletteMode } from '@mui/material';
+import {PaletteMode} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
 import AppAppBar from '@/app/components/AppAppBar';
 import Footer from '@/app/components/Footer';
 import getLPTheme from '@/app/getLPTheme';
@@ -13,6 +13,7 @@ import getLPTheme from '@/app/getLPTheme';
 import Container from "@mui/material/Container";
 import SearchForm from '@/app/components/SearchForm';
 import {ToggleCustomTheme} from "@/app/customThemeService";
+import PopularRoutes from "@/app/components/PopularRoutes";
 
 const Home = () => {
   const [mode, setMode] = React.useState<PaletteMode>('light');
@@ -43,6 +44,7 @@ const Home = () => {
                 pb: { xs: 8, sm: 12 },
               }}
           >
+              <PopularRoutes/>
           </Container>
           <Divider />
 

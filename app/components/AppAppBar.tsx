@@ -16,6 +16,7 @@ import {Labels} from "@/app/components/labels";
 import {logoStyle} from "@/app/components/CustomIcons";
 import {useUserInfoService} from "@/app/services/UserAuthService";
 import {UserInfo} from "@/app/dti/UserInfo";
+import dayjs from "dayjs";
 
 interface AppAppBarProps {
     mode: PaletteMode;
@@ -31,7 +32,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
 
     const [auth, setAuth] = useState<boolean>(false)
     const [userInfo, setUserInfo] = useState<UserInfo>({
-        birthday: "",
+        birthday: dayjs(),
         businessActivity: "",
         car: "",
         description: "",

@@ -23,3 +23,10 @@ export function useTripsSearchService() {
     }
 }
 
+
+export function usePopularRoutesService() {
+    return () => {
+        return apiInstance.get('/trip/popular')
+    }
+}
+

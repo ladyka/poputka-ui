@@ -76,7 +76,7 @@ const TripEdit = (p: TripEditProps) => {
                             <CityAutocompleteInputField city={to} setCity={setTo} labelText={"Куда"}/>
                         </Grid>
                         <Grid item>
-                            <TripDatePicker date={date} setDate={setDate} label={"Дата отправления"}/>
+                            <TripDatePicker date={date} setDate={setDate} label={"Дата отправления"} isPast={true}/>
                         </Grid>
                         <Grid item>
                             <TripTimePicker time={time} setTime={setTime} label={"Время отправления"}/>

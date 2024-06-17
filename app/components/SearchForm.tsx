@@ -97,7 +97,7 @@ export default function SearchForm({from_default, to_default} : SearchFormProps)
                         <CityAutocompleteInputField city={to} setCity={setTo} labelText={"Куда"}/>
                     </Grid>
                     <Grid item xs={12} sm={3}>
-                        <TripDatePicker date={date} setDate={setDate} label={"Дата"}/>
+                        <TripDatePicker date={date} setDate={setDate} label={"Дата"} isPast={true}/>
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <TextField
