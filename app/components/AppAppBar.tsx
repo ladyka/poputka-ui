@@ -304,7 +304,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                             {t(Labels.singIn)}
                                         </Button>
                                     </MenuItem>)}
-                                    {!auth && (<MenuItem>
+                                    {auth && (<MenuItem>
                                         <Button
                                             color="primary"
                                             variant="outlined"
