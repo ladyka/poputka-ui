@@ -12,3 +12,14 @@ export function useTripEditService() {
         return apiInstance.post('/trip/', trip)
     }
 }
+
+export function useTripsSearchService() {
+    return (placeFrom: string, placeTo: string) => {
+        const request = {
+            placeFrom: placeFrom,
+            placeTo: placeTo
+        }
+        return apiInstance.post('/trip/search', request)
+    }
+}
+

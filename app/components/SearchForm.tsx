@@ -31,6 +31,7 @@ export default function SearchForm({from_default, to_default} : SearchFormProps)
         if ((from && from.trim().length > 0) && (to && to.trim().length > 0)) {
             const url = `/ride-sharing/${from}/${to}`
             router.push(url);
+            window.location.href = url
         }
     };
     return (
