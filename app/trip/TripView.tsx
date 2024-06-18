@@ -1,6 +1,7 @@
 import {TripCompanion} from "@/app/dti/TripCompanion";
 import {NEW_TRIP_ID} from "@/pages/trip";
 import * as React from "react";
+import Link from "@mui/material/Link";
 
 interface TripViewProps {
     trip: TripCompanion;
@@ -20,7 +21,9 @@ const TripView = ({trip}: TripViewProps) => {
         Пассажиры {trip.passengers}<br/>
         Комментарии {trip.description}<br/>
         Водитель : {trip.driverName}<br/>
-        {/*<Button>Забронировать место(Написать водителю)</Button>*/}
+        <Link href={"https://t.me/" + trip.ownerTelegramUsername}>
+            Забронировать место(Написать водителю в телеграм)
+        </Link>
     </>)
 }
 

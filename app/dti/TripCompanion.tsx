@@ -11,4 +11,5 @@ export interface TripCompanion {
     description: string;
     passengers: number;
     driverName: string;
+    ownerTelegramUsername: string;
 }

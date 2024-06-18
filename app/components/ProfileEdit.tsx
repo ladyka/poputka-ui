@@ -22,6 +22,8 @@ export default function ProfileEdit() {
     const [music, setMusic] = useState<string>("")
     const [name, setName] = useState<string>("")
     const [surname, setSurname] = useState<string>("")
+    const [telegramId, setTelegramId] = useState<number>(0)
+    const [telegramUsername, setTelegramUserame] = useState<string>("")
 
     useEffect(() => {
         userInfoService()
@@ -36,12 +38,14 @@ export default function ProfileEdit() {
                     setMusic(data.music)
                     setName(data.name)
                     setSurname(data.surname)
+                    setTelegramId(data.telegramId)
+                    setTelegramUserame(data.telegramUsername)
                 }
             })
             .catch(reason => {
                 console.error(reason)
             })
-    }, [name, surname]);
+    }, [auth]);
 
 
     function handleSubmit() {
@@ -65,7 +69,7 @@ export default function ProfileEdit() {
 
     return (
         <Stack spacing={2} useFlexGap sx={{width: {xs: '100%', sm: '70%'}}}>
-            <Stack
+            {auth && (<Stack
                 direction={{xs: 'column', sm: 'row'}}
                 alignSelf="center"
                 spacing={1}
@@ -150,7 +154,6 @@ export default function ProfileEdit() {
                                 fullWidth
                             />
                         </Grid>
-
                         <Typography variant="caption" textAlign="center" sx={{opacity: 0.8}}>
                             {/*By clicking &quot;Start now&quot; you agree to our&nbsp;*/}
                             Нажимая «Сохранить», вы соглашаетесь с нашими&nbsp;
@@ -165,9 +168,27 @@ export default function ProfileEdit() {
                                 Сохранить
                             </Button>
                         </Grid>
+
+                        {telegramId != 0 && (<Grid item>
+                            <Typography>
+                                Ваш телеграм Юзернейм : {telegramUsername}
+                            </Typography>
+                            <Typography>
+                                Ваш телеграм id : {telegramId}
+                            </Typography>
+                            <Button variant="contained" color="primary" fullWidth onClick={e => {
+                                setTelegramId(0)
+                            }}>
+                                Обновить привязку телеграмм
+                            </Button>
+                        </Grid>)}
+
+                        {telegramId == 0 && (<Grid item>
+                            <iframe src="/telegram.html"></iframe>
+                        </Grid>)}
                     </Grid>
                 </form>
-            </Stack>
+            </Stack>)}
         </Stack>
     );
 }
