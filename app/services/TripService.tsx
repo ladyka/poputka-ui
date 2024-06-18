@@ -1,4 +1,4 @@
-import {TripCompanion} from "@/app/dti/TripCompanion";
+import {TripCompanionEdit} from "@/app/dti/TripCompanionEdit";
 import {apiInstance} from "@/app/services/ApiInstance";
 
 export default function useTripGetService() {
@@ -8,7 +8,7 @@ export default function useTripGetService() {
 }
 
 export function useTripEditService() {
-    return (trip: TripCompanion) => {
+    return (trip: TripCompanionEdit) => {
         return apiInstance.post('/trip/', trip)
     }
 }

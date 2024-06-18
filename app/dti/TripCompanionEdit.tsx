@@ -1,6 +1,6 @@
 import {Dayjs} from "dayjs";
 
-export interface TripCompanion {
+export interface TripCompanionEdit {
     id: number;
     from: string;
     to: string;
@@ -10,6 +10,4 @@ export interface TripCompanion {
     car: string;
     description: string;
     passengers: number;
-    driverName: string;
-    ownerTelegramUsername: string;
 }

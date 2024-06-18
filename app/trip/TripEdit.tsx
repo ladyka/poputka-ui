@@ -1,4 +1,4 @@
-import {TripCompanion} from "@/app/dti/TripCompanion";
+import {TripCompanionEdit} from "@/app/dti/TripCompanionEdit";
 
 import * as React from 'react';
 import {useState} from 'react';
@@ -18,7 +18,7 @@ import CurrencyRadioButtonsGroup from "../components/CurrencyRadioButtonsGroup";
 import dayjs, {Dayjs} from "dayjs";
 
 interface TripEditProps {
-    trip: TripCompanion,
+    trip: TripCompanionEdit,
     setEditMode: any,
     setTrip: any,
 }

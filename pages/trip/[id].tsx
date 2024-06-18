@@ -12,9 +12,10 @@ import getLPTheme from '@/app/getLPTheme';
 
 import TripView from "@/app/trip/TripView";
 import useTripGetService from "@/app/services/TripService";
-import {TripCompanion} from "@/app/dti/TripCompanion";
+import {TripCompanionEdit} from "@/app/dti/TripCompanionEdit";
 import Container from "@mui/material/Container";
 import {ToggleCustomTheme} from "@/app/customThemeService";
+import {TripCompanionView} from "@/app/dti/TripCompanionView";
 
 export default function TripIdPage() {
     const [mode, setMode] = React.useState<PaletteMode>('light');
@@ -35,7 +36,7 @@ export default function TripIdPage() {
     const tripId = typeof id === 'string' ? id : '-1'
 
     let tripGetService = useTripGetService()
-    const [trip, setTrip] = useState<TripCompanion | null>(null)
+    const [trip, setTrip] = useState<TripCompanionView | null>(null)
 
     useEffect(() => {
         if ((trip && trip.id > 0) || (tripId === '-1')) {

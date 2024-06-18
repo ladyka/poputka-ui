@@ -14,16 +14,17 @@ import Container from "@mui/material/Container";
 import {ToggleCustomTheme} from "@/app/customThemeService";
 import SearchForm from "@/app/components/SearchForm";
 import {useTripsSearchService} from "@/app/services/TripService";
-import {TripCompanion} from "@/app/dti/TripCompanion";
+import {TripCompanionEdit} from "@/app/dti/TripCompanionEdit";
 import dayjs from "dayjs";
 import Button from "@mui/material/Button";
+import {TripCompanionView} from "@/app/dti/TripCompanionView";
 
 export default function RideSharing() {
     const [mode, setMode] = React.useState<PaletteMode>('light');
     const [showCustomTheme, setShowCustomTheme] = React.useState(true);
     const LPtheme = createTheme(getLPTheme(mode));
     const defaultTheme = createTheme({palette: {mode}});
-    const [trips, setTrips] = useState<TripCompanion[]>([])
+    const [trips, setTrips] = useState<TripCompanionView[]>([])
     const [searchFormShow, setSearchFormShow] = useState<boolean>(false)
 
     const router = useRouter();

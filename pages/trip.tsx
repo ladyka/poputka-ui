@@ -12,13 +12,14 @@ import getLPTheme from '@/app/getLPTheme';
 
 import {ToggleCustomTheme} from "@/app/customThemeService";
 import TripEdit from "@/app/trip/TripEdit";
-import {TripCompanion} from "@/app/dti/TripCompanion";
+import {TripCompanionEdit} from "@/app/dti/TripCompanionEdit";
 import dayjs from "dayjs";
 import TripView from "@/app/trip/TripView";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import {useTripEditService} from "@/app/services/TripService";
 import {useRouter} from "next/router";
+import {TripCompanionView} from "@/app/dti/TripCompanionView";
 
 export const NEW_TRIP_ID = -1
 
@@ -41,17 +42,16 @@ export default function NewTrip() {
     const tripEditService = useTripEditService()
     const router = useRouter();
 
-    const [editTrip, setEditTrip] = useState<TripCompanion>({
+    const [editTrip, setEditTrip] = useState<TripCompanionEdit>({
         start: dayjs().set('minute', 0).set('hours', dayjs().hour() + 1),
         car: "",
         currency: "BYN",
         description: "",
         from: "Минск",
         id: NEW_TRIP_ID,
-        price: 0,
-        to: "Молодечно",
-        passengers: 3,
-        driverName: "You"
+        price: 20,
+        to: "Минск",
+        passengers: 3
     })
 
     return (
@@ -82,7 +82,19 @@ export default function NewTrip() {
                         {editMode && (<TripEdit trip={editTrip} setEditMode={setEditMode} setTrip={setEditTrip}/>)}
                         {!editMode && (
                             <>
-                                <TripView trip={editTrip}/>
+                                <TripView trip={{
+                                    start: editTrip.start,
+                                    car: editTrip.car,
+                                    currency: editTrip.currency,
+                                    description: editTrip.description,
+                                    from: editTrip.from,
+                                    id: editTrip.id,
+                                    price: editTrip.price,
+                                    to: editTrip.to,
+                                    passengers: editTrip.passengers,
+                                    driverName: "",
+                                    ownerTelegramUsername: ""
+                                }}/>
                                 <Button variant="contained" color="primary" fullWidth onClick={event => {
                                     setEditMode(true)
                                 }}>
