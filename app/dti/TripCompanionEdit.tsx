@@ -7,7 +7,6 @@ export interface TripCompanionEdit {
     start: Dayjs;
     price: number;
     currency: string;
-    car: string;
     description: string;
     passengers: number;
 }

@@ -1,7 +1,7 @@
 import {useRouter} from 'next/router';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {Card, CardContent, PaletteMode, Typography} from '@mui/material';
+import {Card, CardContent, Link, PaletteMode, Typography} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -18,6 +18,7 @@ import {TripCompanionEdit} from "@/app/dti/TripCompanionEdit";
 import dayjs from "dayjs";
 import Button from "@mui/material/Button";
 import {TripCompanionView} from "@/app/dti/TripCompanionView";
+import TripView from "@/app/trip/TripView";
 
 export default function RideSharing() {
     const [mode, setMode] = React.useState<PaletteMode>('light');
@@ -89,21 +90,9 @@ export default function RideSharing() {
                         Поискать ещё маршруты
                     </Button>)}
                     {trips.map((trip) => (
-                        <Card key={trip.id} sx={{
-                            width: '100%',
-                            padding: '10px'
-                        }}>
-                            <CardContent>
-                                <Typography variant="h5"> Поездка из {trip.from} в {trip.to}</Typography>
-                                <Typography>Дата отправления: {dayjs(trip.start).format('YYYY-MM-DD')}</Typography>
-                                <Typography>Время отправления: {dayjs(trip.start).format('HH:mm')}</Typography>
-                                <Typography>Стоимость: {trip.price} {trip.currency}</Typography>
-                                <Typography>Автомобиль: {trip.car}</Typography>
-                                <Typography>Коментарии водителя: {trip.description}</Typography>
-                                <Typography>Количество свободных мест для пассажиров: {trip.passengers}</Typography>
-                                <Typography>Имя водителя: {trip.driverName}</Typography>
-                            </CardContent>
-                        </Card>
+                        <Link key={trip.id} href={'/trip/' + trip.id}>
+                            <TripView trip={trip} />
+                        </Link>
                     ))}
                 </Container>
                 <Divider/>

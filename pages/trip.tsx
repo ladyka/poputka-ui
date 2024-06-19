@@ -19,7 +19,6 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import {useTripEditService} from "@/app/services/TripService";
 import {useRouter} from "next/router";
-import {TripCompanionView} from "@/app/dti/TripCompanionView";
 
 export const NEW_TRIP_ID = -1
 
@@ -44,7 +43,6 @@ export default function NewTrip() {
 
     const [editTrip, setEditTrip] = useState<TripCompanionEdit>({
         start: dayjs().set('minute', 0).set('hours', dayjs().hour() + 1),
-        car: "",
         currency: "BYN",
         description: "",
         from: "Минск",
@@ -84,7 +82,6 @@ export default function NewTrip() {
                             <>
                                 <TripView trip={{
                                     start: editTrip.start,
-                                    car: editTrip.car,
                                     currency: editTrip.currency,
                                     description: editTrip.description,
                                     from: editTrip.from,
@@ -92,15 +89,18 @@ export default function NewTrip() {
                                     price: editTrip.price,
                                     to: editTrip.to,
                                     passengers: editTrip.passengers,
+                                    car: "",
                                     driverName: "",
                                     ownerTelegramUsername: ""
                                 }}/>
-                                <Button variant="contained" color="primary" fullWidth onClick={event => {
+                                <Button variant="contained" color="primary" fullWidth
+                                        onClick={event => {
                                     setEditMode(true)
                                 }}>
                                     Нужно внести изменения
                                 </Button>
-                                <Button variant="contained" color="primary" fullWidth onClick={event => {
+                                <Button variant="contained" color="primary" fullWidth
+                                        onClick={event => {
                                     console.log(editTrip)
                                     tripEditService(editTrip).then(value => {
                                         const url = `/trip/${value.data.id}`
