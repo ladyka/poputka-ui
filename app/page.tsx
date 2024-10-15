@@ -33,7 +33,7 @@ const Home = () => {
       <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
         <CssBaseline />
         <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
-        <SearchForm from_default={'Минск'} to_default={'Молодечно'} />
+          <SearchForm from_default={'Minsk'} to_default={'Maladzyechna'}/>
         <Box sx={{ bgcolor: 'background.default' }}>
           <Container
               sx={{

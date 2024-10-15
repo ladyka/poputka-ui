@@ -11,11 +11,12 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import {NEW_TRIP_ID} from "@/pages/trip";
-import CityAutocompleteInputField from "@/app/components/CityAutocompleteInputField";
+import PlaceAutocompleteInputField from "@/app/components/PlaceAutocompleteInputField";
 import TripDatePicker from "@/app/components/TripDatePicker";
 import TripTimePicker from "@/app/components/TripTimePicker";
 import CurrencyRadioButtonsGroup from "../components/CurrencyRadioButtonsGroup";
 import dayjs, {Dayjs} from "dayjs";
+import {Place} from "@/app/dti/place";
 
 interface TripEditProps {
     trip: TripCompanionEdit,
@@ -27,8 +28,18 @@ const TripEdit = (p: TripEditProps) => {
     const trip = p.trip
     const setEditMode = p.setEditMode
     const setTrip = p.setTrip
-    const [from, setFrom] = useState<string>(trip.from);
-    const [to, setTo] = useState<string>(trip.to);
+    const [placeFrom, setPlaceFrom] = React.useState<Place>({
+        name: trip.from,
+        displayName: trip.from,
+        latitude: 53.902233,
+        longitude: 27.561888
+    })
+    const [placeTo, setPlaceTo] = React.useState<Place>({
+        name: trip.to,
+        displayName: trip.to,
+        latitude: 53.902233,
+        longitude: 27.561888
+    })
     const [date, setDate] = React.useState<Dayjs>(trip.start);
     const [time, setTime] = useState(trip.start);
     const [passengers, setPassengers] = useState(trip.passengers);
@@ -36,9 +47,10 @@ const TripEdit = (p: TripEditProps) => {
     const [description, setDescription] = useState(trip.description);
     const [price, setPrice] = useState(trip.price);
 
+
     function handleSubmit() {
-        trip.from = from
-        trip.to = to
+        trip.from = placeFrom.name
+        trip.to = placeTo.name
         trip.start = dayjs()
             .set('year', date.year())
             .set('month', date.month())
@@ -70,10 +82,11 @@ const TripEdit = (p: TripEditProps) => {
                             {trip.id === NEW_TRIP_ID && (<h2>Создание новой поездки</h2>)}
                         </Grid>
                         <Grid item>
-                            <CityAutocompleteInputField city={from} setCity={setFrom} labelText={"Откуда"}/>
+                            <PlaceAutocompleteInputField place={placeFrom} setPlace={setPlaceFrom}
+                                                         labelText={"Откуда"}/>
                         </Grid>
                         <Grid item>
-                            <CityAutocompleteInputField city={to} setCity={setTo} labelText={"Куда"}/>
+                            <PlaceAutocompleteInputField place={placeTo} setPlace={setPlaceTo} labelText={"Куда"}/>
                         </Grid>
                         <Grid item>
                             <TripDatePicker date={date} setDate={setDate} label={"Дата отправления"} isPast={true}/>

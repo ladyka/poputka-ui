@@ -1,7 +1,7 @@
 import {useRouter} from 'next/router';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {Card, CardContent, Link, PaletteMode, Typography} from '@mui/material';
+import {Link, PaletteMode} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -14,8 +14,6 @@ import Container from "@mui/material/Container";
 import {ToggleCustomTheme} from "@/app/customThemeService";
 import SearchForm from "@/app/components/SearchForm";
 import {useTripsSearchService} from "@/app/services/TripService";
-import {TripCompanionEdit} from "@/app/dti/TripCompanionEdit";
-import dayjs from "dayjs";
 import Button from "@mui/material/Button";
 import {TripCompanionView} from "@/app/dti/TripCompanionView";
 import TripView from "@/app/trip/TripView";
@@ -30,8 +28,8 @@ export default function RideSharing() {
 
     const router = useRouter();
     const {fromto} = router.query;
-    let from = "Минск"
-    let to = "Минск"
+    let from = "Minsk"
+    let to = "Minsk"
     useEffect(() => {
         if (Array.isArray(fromto)) {
             setFromPlace(fromto[0]);

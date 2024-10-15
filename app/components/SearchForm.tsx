@@ -10,26 +10,37 @@ import Button from "@mui/material/Button";
 import dayjs, {Dayjs} from 'dayjs';
 import Typography from "@mui/material/Typography";
 import {useRouter} from "next/navigation";
-import CityAutocompleteInputField from "@/app/components/CityAutocompleteInputField";
+import PlaceAutocompleteInputField from "@/app/components/PlaceAutocompleteInputField";
 import TripDatePicker from "@/app/components/TripDatePicker";
+import {Place} from "@/app/dti/place";
 
 interface SearchFormProps {
     from_default: string
     to_default: string
 }
 
-export default function SearchForm({from_default, to_default} : SearchFormProps) {
-    const [from, setFrom] = useState<string>(from_default);
-    const [to, setTo] = useState<string>(to_default);
+export default function SearchForm({from_default, to_default}: SearchFormProps) {
     const [date, setDate] = React.useState<Dayjs | null>(dayjs());
+    const [placeFrom, setPlaceFrom] = React.useState<Place>({
+        name: from_default,
+        displayName: from_default,
+        latitude: 53.902233,
+        longitude: 27.561888
+    })
+    const [placeTo, setPlaceTo] = React.useState<Place>({
+        name: to_default,
+        displayName: to_default,
+        latitude: 53.902233,
+        longitude: 27.561888
+    })
 
     const [passengers, setPassengers] = useState(1);
     const router = useRouter();
     const handleSearch = () => {
         // Действия по выполнению поиска
-        console.log(`Searching for trips from ${from} to ${to} on ${date} for ${passengers} passengers`);
-        if ((from && from.trim().length > 0) && (to && to.trim().length > 0)) {
-            const url = `/ride-sharing/${from}/${to}`
+        console.log(`Searching for trips from ${placeFrom.name} to ${placeTo.name} on ${date} for ${passengers} passengers`);
+        if ((placeFrom.name && placeFrom.name.trim().length > 0) && (placeTo.name && placeTo.name.trim().length > 0)) {
+            const url = `/ride-sharing/${placeFrom.name}/${placeTo.name}`
             router.push(url);
             window.location.href = url
         }
@@ -55,13 +66,15 @@ export default function SearchForm({from_default, to_default} : SearchFormProps)
                     pb: {xs: 8, sm: 12},
                 }}
             >
-                <Stack spacing={2} useFlexGap sx={{ width: { xs: '100%', sm: '70%' },
-                    marginBottom: '40px' }}>
+                <Stack spacing={2} useFlexGap sx={{
+                    width: {xs: '100%', sm: '70%'},
+                    marginBottom: '40px'
+                }}>
                     <Typography
                         variant="h1"
                         sx={{
                             display: 'flex',
-                            flexDirection: { xs: 'column', md: 'row' },
+                            flexDirection: {xs: 'column', md: 'row'},
                             alignSelf: 'center',
                             textAlign: 'center',
                             fontSize: 'clamp(3.5rem, 10vw, 4rem)',
@@ -83,7 +96,7 @@ export default function SearchForm({from_default, to_default} : SearchFormProps)
                     <Typography
                         textAlign="center"
                         color="text.secondary"
-                        sx={{ alignSelf: 'center', width: { sm: '100%', md: '80%' } }}
+                        sx={{alignSelf: 'center', width: {sm: '100%', md: '80%'}}}
                     >
                         Место в котором водители и попутчики находят друг-друга.
                     </Typography>
@@ -91,10 +104,10 @@ export default function SearchForm({from_default, to_default} : SearchFormProps)
 
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={3}>
-                        <CityAutocompleteInputField city={from} setCity={setFrom} labelText={"Откуда"}/>
+                        <PlaceAutocompleteInputField place={placeFrom} setPlace={setPlaceFrom} labelText={"Откуда"}/>
                     </Grid>
                     <Grid item xs={12} sm={3}>
-                        <CityAutocompleteInputField city={to} setCity={setTo} labelText={"Куда"}/>
+                        <PlaceAutocompleteInputField place={placeTo} setPlace={setPlaceTo} labelText={"Куда"}/>
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <TripDatePicker date={date} setDate={setDate} label={"Дата"} isPast={true}/>
@@ -119,7 +132,8 @@ export default function SearchForm({from_default, to_default} : SearchFormProps)
                 </Grid>
                 <Grid>
                     <Grid item xs={12} sm={12}>
-                        <Button variant="contained" color="primary" onClick={handleSearch} sx={{ width: '100%', margin: '10px'}}>
+                        <Button variant="contained" color="primary" onClick={handleSearch}
+                                sx={{width: '100%', margin: '10px'}}>
                             Найти
                         </Button>
                     </Grid>

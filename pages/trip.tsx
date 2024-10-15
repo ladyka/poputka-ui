@@ -45,10 +45,10 @@ export default function NewTrip() {
         start: dayjs().set('minute', 0).set('hours', dayjs().hour() + 1),
         currency: "BYN",
         description: "",
-        from: "Минск",
+        from: "Minsk",
         id: NEW_TRIP_ID,
         price: 20,
-        to: "Минск",
+        to: "Minsk",
         passengers: 3
     })
 
