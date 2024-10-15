@@ -1,4 +1,4 @@
 include:
   - project: ladyka/gitlab-common
     ref: master
-    file: .gitlab-ci-ui-next-react.yml
+    file: .gitlab-ci-next_js-service.yml
