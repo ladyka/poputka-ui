@@ -15,6 +15,7 @@ export const instance = axios.create({
   baseURL: "/",
   withCredentials: true,
 });
+
 export const apiInstance = axios.create({
   baseURL: "/api",
   withCredentials: true,
