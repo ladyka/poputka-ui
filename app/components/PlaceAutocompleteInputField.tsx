@@ -1,7 +1,8 @@
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import * as React from "react";
-import {Place} from "@/app/dti/place";
+import { debounce } from "@mui/material/utils";
+import { Place } from "@/app/dti/place";
 
 interface PlaceInputFieldProps {
     place: Place;
@@ -9,63 +10,86 @@ interface PlaceInputFieldProps {
     labelText: string;
 }
 
-export default function PlaceAutocompleteInputField({place, setPlace, labelText}: PlaceInputFieldProps) {
+const lang = navigator.languages?.[0] || navigator.language || "ru";
+
+export default function PlaceAutocompleteInputField({
+    place,
+    setPlace,
+    labelText,
+}: PlaceInputFieldProps) {
     const [options, setOptions] = React.useState<Place[]>([]);
     const [loading, setLoading] = React.useState(false);
-
-    const fetchCities = async (inputValue: string) => {
-        if (inputValue.length < 3) {
-            setOptions([]);
-            return;
-        }
-
-        setLoading(true);
+    const fetchCities = React.useCallback(async (inputValue: string) => {
         try {
-            const response = await fetch(`https://nominatim.openstreetmap.org/search?city=${inputValue}&format=json&addressdetails=1&limit=10`);
-            const data = await response.json();
-            const cityOptions = data.map((item: any) => {
-                debugger;
-                return ({
-                    name: item.name,
-                    displayName: item.display_name,
-                    latitude: parseFloat(item.latitude),
-                    longitude: parseFloat(item.longitude),
-                });
-            });
+        const response = await fetch(
+            `https://nominatim.openstreetmap.org/search?` +
+            `city=${encodeURIComponent(inputValue)}` +
+            `&format=json&addressdetails=1&limit=10` +
+            `&accept-language=${lang}`
+        );
+        const data = await response.json();
+        const cityOptions: Place[] = data.map((item: any) => ({
+            name: item.name,
+            displayName: item.display_name,
+            latitude: parseFloat(item.lat),
+            longitude: parseFloat(item.lon),
+            id: item.place_id.toString(),
+        }));
             setOptions(cityOptions);
         } catch (error) {
-            console.error("Error fetching cities:", error);
+            setOptions([]);
         } finally {
-            setLoading(false);
+            setLoading(false); 
         }
-    };
+    }, []);
+
+    const debouncedFetch = React.useMemo(
+        () => debounce((value: string) => {
+            fetchCities(value);
+        }, 500),
+    [fetchCities]);
+
+    const handleInputChange = React.useCallback(
+        (_: React.SyntheticEvent, newValue: string) => {
+            if (newValue.length < 3) {
+                debouncedFetch.clear();
+                setLoading(false);
+                setOptions([]);
+            } else {
+                setLoading(true);
+                setOptions([]);
+                debouncedFetch(newValue);
+            }
+        },
+        [debouncedFetch]
+    );
 
     return (
         <Autocomplete
             value={place}
-            onChange={(event, newValue, reason, details) => {
+            onChange={(_, newValue) => {
                 if (newValue) {
-                    setPlace(newValue)
+                    setPlace(newValue);
                 } else {
                     setPlace({
-                        name: '',
-                        displayName: '',
+                        name: "",
+                        displayName: "",
                         latitude: 0,
-                        longitude: 0
+                        longitude: 0,
+                        id: "",
                     });
                 }
             }}
-            onInputChange={(event, newInputValue) => {
-                fetchCities(newInputValue);
-            }}
+            onInputChange={handleInputChange}
             options={options}
             loading={loading}
+            loadingText="Загружаем…"
+            noOptionsText={loading ? "" : "пустой"}
             getOptionLabel={(option) => option.displayName}
-            renderInput={(params) => (
-                <TextField {...params} label={labelText} fullWidth/>
-            )}
+            filterOptions={(opts) => opts}
+            renderInput={(params) => <TextField {...params} label={labelText} fullWidth />}
             renderOption={(props, option) => (
-                <li {...props} key={option.name}>
+                <li {...props} key={option.id}>
                     {option.displayName}
                 </li>
             )}
