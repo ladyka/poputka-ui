@@ -15,6 +15,7 @@ export default function ProfileEdit() {
     const userInfoService = useUserInfoService()
     const saveProfileService = useSaveProfileService()
     const [auth, setAuth] = useState<boolean>(false)
+    const [email, setEmail] = useState<string>('')
     const [birthday, setBirthday] = useState<Dayjs>(dayjs())
     const [businessActivity, setBusinessActivity] = useState<string>("")
     const [car, setCar] = useState<string>("")
@@ -31,6 +32,7 @@ export default function ProfileEdit() {
                 const data = value.data
                 if (data.email?.length > 3) {
                     setAuth(true)
+                    setEmail(data.email)
                     setBirthday(dayjs(data.birthday))
                     setBusinessActivity(data.businessActivity)
                     setCar(data.car)
@@ -78,6 +80,12 @@ export default function ProfileEdit() {
             >
                 <form>
                     <Grid container spacing={3} direction="column">
+                        <Grid item>
+                            <Button
+                                variant="text"
+                                value={email}
+                            />
+                        </Grid>
                         <Grid item>
                             <TextField
                                 type={'text'}
