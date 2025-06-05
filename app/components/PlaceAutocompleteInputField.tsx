@@ -34,6 +34,8 @@ export default function PlaceAutocompleteInputField({
             latitude: parseFloat(item.lat),
             longitude: parseFloat(item.lon),
             id: item.place_id.toString(),
+            osm_id: item.osm_id,
+            osm_type: item.osm_type
         }));
             setOptions(cityOptions);
         } catch (error) {
@@ -77,6 +79,8 @@ export default function PlaceAutocompleteInputField({
                         latitude: 0,
                         longitude: 0,
                         id: "",
+                        osm_id: -1,
+                        osm_type: "",
                     });
                 }
             }}

@@ -26,14 +26,18 @@ export default function SearchForm({from_default, to_default}: SearchFormProps) 
         displayName: from_default,
         latitude: 53.902233,
         longitude: 27.561888,
-        id: "159745529"
+        id: "159745529",
+        osm_id: 59195,
+        osm_type: "relation",
     })
     const [placeTo, setPlaceTo] = React.useState<Place>({
         name: to_default,
         displayName: to_default,
         latitude: 53.902233,
         longitude: 27.561888,
-        id: "160685692"
+        id: "160685692",
+        osm_id: 6722552,
+        osm_type: "relation"
     })
 
     const [passengers, setPassengers] = useState(1);

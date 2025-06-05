@@ -45,11 +45,19 @@ export default function NewTrip() {
         start: dayjs().set('minute', 0).set('hours', dayjs().hour() + 1),
         currency: "BYN",
         description: "",
-        from: "Minsk",
+        from: {
+            name: "Minsk",
+            osm_id: 59195,
+            osm_type: "relation",
+        },
         id: NEW_TRIP_ID,
         price: 20,
-        to: "Minsk",
-        passengers: 3
+        to: {
+            name: "Minsk",
+            osm_id: 59195,
+            osm_type: "relation",
+        },
+        passengers: 3,
     })
 
     return (
@@ -84,10 +92,10 @@ export default function NewTrip() {
                                     start: editTrip.start,
                                     currency: editTrip.currency,
                                     description: editTrip.description,
-                                    from: editTrip.from,
+                                    from: editTrip.from.name,
                                     id: editTrip.id,
                                     price: editTrip.price,
-                                    to: editTrip.to,
+                                    to: editTrip.to.name,
                                     passengers: editTrip.passengers,
                                     car: "",
                                     driverName: "",

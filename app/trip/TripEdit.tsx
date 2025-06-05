@@ -29,16 +29,20 @@ const TripEdit = (p: TripEditProps) => {
     const setEditMode = p.setEditMode
     const setTrip = p.setTrip
     const [placeFrom, setPlaceFrom] = React.useState<Place>({
-        name: trip.from,
-        displayName: trip.from,
+        name: trip.from.name,
+        displayName: trip.from.name,
         latitude: 53.902233,
-        longitude: 27.561888
+        longitude: 27.561888,
+        osm_id: 59195,
+        osm_type: "relation",
     })
     const [placeTo, setPlaceTo] = React.useState<Place>({
-        name: trip.to,
-        displayName: trip.to,
+        name: trip.to.name,
+        displayName: trip.to.name,
         latitude: 53.902233,
-        longitude: 27.561888
+        longitude: 27.561888,
+        osm_id: 59195,
+        osm_type: "relation",
     })
     const [date, setDate] = React.useState<Dayjs>(trip.start);
     const [time, setTime] = useState(trip.start);
@@ -47,10 +51,9 @@ const TripEdit = (p: TripEditProps) => {
     const [description, setDescription] = useState(trip.description);
     const [price, setPrice] = useState(trip.price);
 
-
     function handleSubmit() {
-        trip.from = placeFrom.name
-        trip.to = placeTo.name
+        trip.from = { name: placeFrom.name, osm_id: placeFrom.osm_id, osm_type: placeFrom.osm_type }
+        trip.to = { name: placeTo.name, osm_id: placeTo.osm_id, osm_type: placeTo.osm_type }
         trip.start = dayjs()
             .set('year', date.year())
             .set('month', date.month())
