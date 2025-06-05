@@ -4,4 +4,6 @@ export interface Place {
     latitude: number;
     longitude: number;
     id?: string;
+    osm_type: string;
+    osm_id: number;
 }
