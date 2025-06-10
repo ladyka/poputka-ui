@@ -17,6 +17,7 @@ import {logoStyle} from "@/app/components/CustomIcons";
 import {useUserInfoService} from "@/app/services/UserAuthService";
 import {UserInfo} from "@/app/dti/UserInfo";
 import dayjs from "dayjs";
+import Image from 'next/image';
 
 interface AppAppBarProps {
     mode: PaletteMode;
@@ -58,7 +59,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
             .catch(reason => {
                 console.error(reason)
             })
-    }, [name, surname]);
+    }, [name, surname, userInfoService]);
 
     // const { t } = useTranslation();
     const t = (label: string) => {
@@ -132,7 +133,9 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                             }}
                         >
                             <Link href={'/'}>
-                                <img
+                                <Image
+                                    width={140}
+                                    height={60}
                                     src={'/logo.png'}
                                     style={logoStyle}
                                     alt="logo of Poputka.by"

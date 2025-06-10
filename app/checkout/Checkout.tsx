@@ -13,6 +13,7 @@ import Stepper from '@mui/material/Stepper';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
+import Image from 'next/image';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { PaletteMode } from '@mui/material';
@@ -153,8 +154,10 @@ export default function Checkout() {
               sx={{ ml: '-8px' }}
             >
               Back to
-              <img
-                  src={'/logo.png'}
+              <Image
+                width={140}
+                height={60}
+                src={'/logo.png'}
                 style={logoStyle}
                 alt="Poputka.by's logo"
               />
@@ -213,8 +216,10 @@ export default function Checkout() {
                 sx={{ alignSelf: 'start' }}
               >
                 Back to
-                <img
-                    src={'/logo.png'}
+                <Image
+                  width={140}
+                  height={60}
+                  src={'/logo.png'}
                   style={logoStyle}
                   alt="Poputka.by's logo"
                 />

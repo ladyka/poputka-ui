@@ -51,7 +51,7 @@ export default function TripIdPage() {
             .catch(reason => {
                 console.error(reason)
             });
-    }, [tripId])
+    }, [trip, tripGetService, tripId])
 
     return (
         <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
