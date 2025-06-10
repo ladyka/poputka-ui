@@ -9,13 +9,14 @@ import {usePopularRoutesService} from "@/app/services/TripService";
 
 export default function PopularRoutes() {
     const [popularRoutes, setPopularRoutes] = useState<PopularRoute[]>([])
-    const popularRoutesService = usePopularRoutesService()
+    const popularRoutesService = usePopularRoutesService();
+
     useEffect(() => {
         popularRoutesService().then(value => {
             setPopularRoutes(value.data)
             console.log(value.data)
         })
-    }, []);
+    }, [popularRoutesService]);
 
     return (<Stack spacing={2} useFlexGap sx={{width: {xs: '100%', sm: '70%'}}}>
         <Stack

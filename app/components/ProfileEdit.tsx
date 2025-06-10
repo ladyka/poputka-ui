@@ -47,7 +47,7 @@ export default function ProfileEdit() {
             .catch(reason => {
                 console.error(reason)
             })
-    }, [auth]);
+    }, [auth, userInfoService]);
 
 
     function handleSubmit() {

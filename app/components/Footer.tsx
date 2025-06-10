@@ -7,6 +7,7 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Image from 'next/image';
 
 import FacebookIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -58,10 +59,12 @@ export default function Footer() {
         >
           <Box sx={{ width: { xs: '100%', sm: '60%' } }}>
             <Box sx={{ ml: '-15px' }}>
-              <img
-                  src={'/logo.png'}
+              <Image
+                src={'/logo.png'}
+                height={60}
+                width={140}
                 style={logoStyle}
-                  alt="Poputka.by's logo"
+                alt="Poputka.by's logo"
               />
             </Box>
             {/*<Typography variant="body2" fontWeight={600} gutterBottom>*/}

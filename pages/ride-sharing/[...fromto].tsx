@@ -60,7 +60,7 @@ export default function RideSharing() {
                     console.error(reason)
                 })
         }
-    }, [toPlace]);
+    }, [fromPlace, toPlace, tripsSearchService]);
     return (
         <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
             <CssBaseline/>
