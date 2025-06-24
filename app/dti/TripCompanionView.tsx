@@ -5,8 +5,8 @@ export interface TripCompanionView {
     from: string;
     to: string;
     start: Dayjs;
-    price: number;
-    currency: string;
+    // price: number;
+    // currency: string;
     car: string;
     description: string;
     passengers: number;

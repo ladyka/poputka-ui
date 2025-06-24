@@ -43,7 +43,7 @@ export default function NewTrip() {
 
     const [editTrip, setEditTrip] = useState<TripCompanionEdit>({
         start: dayjs().set('minute', 0).set('hours', dayjs().hour() + 1),
-        currency: "BYN",
+        // currency: "BYN",
         description: "",
         from: {
             name: "Minsk",
@@ -51,7 +51,7 @@ export default function NewTrip() {
             osm_type: "relation",
         },
         id: NEW_TRIP_ID,
-        price: 20,
+        // price: 20,
         to: {
             name: "Minsk",
             osm_id: 59195,
@@ -90,11 +90,11 @@ export default function NewTrip() {
                             <>
                                 <TripView trip={{
                                     start: editTrip.start,
-                                    currency: editTrip.currency,
+                                    // currency: editTrip.currency,
                                     description: editTrip.description,
                                     from: editTrip.from.name,
                                     id: editTrip.id,
-                                    price: editTrip.price,
+                                    // price: editTrip.price,
                                     to: editTrip.to.name,
                                     passengers: editTrip.passengers,
                                     car: "",
