@@ -13,8 +13,8 @@ export interface TripCompanionEdit {
         osm_type: string;
     },
     start: Dayjs;
-    price: number;
-    currency: string;
+    // price: number;
+    // currency: string;
     description: string;
     passengers: number;
 }

@@ -47,9 +47,9 @@ const TripEdit = (p: TripEditProps) => {
     const [date, setDate] = React.useState<Dayjs>(trip.start);
     const [time, setTime] = useState(trip.start);
     const [passengers, setPassengers] = useState(trip.passengers);
-    const [currency, setCurrency] = useState(trip.currency);
+    // const [currency, setCurrency] = useState(trip.currency);
     const [description, setDescription] = useState(trip.description);
-    const [price, setPrice] = useState(trip.price);
+    // const [price, setPrice] = useState(trip.price);
 
     function handleSubmit() {
         trip.from = { name: placeFrom.name, osm_id: placeFrom.osm_id, osm_type: placeFrom.osm_type }
@@ -62,9 +62,9 @@ const TripEdit = (p: TripEditProps) => {
             .set('minute', time.minute())
             .set('second', 0)
         trip.passengers = passengers
-        trip.currency = currency
+        // trip.currency = currency
         trip.description = description
-        trip.price = price
+        // trip.price = price
         setTrip(trip)
         setEditMode(false)
     }
@@ -97,7 +97,7 @@ const TripEdit = (p: TripEditProps) => {
                         <Grid item>
                             <TripTimePicker time={time} setTime={setTime} label={"Время отправления"}/>
                         </Grid>
-                        <Grid item>
+                        {/* <Grid item>
                             <TextField
                                 type={'number'}
                                 label="Стоимость" variant="outlined" fullWidth value={price} onChange={event => {
@@ -117,7 +117,7 @@ const TripEdit = (p: TripEditProps) => {
                         </Grid>
                         <Grid item>
                             <CurrencyRadioButtonsGroup value={currency} setValue={setCurrency} label="Валюта"/>
-                        </Grid>
+                        </Grid> */}
                         <Grid item>
                             <TextField
                                 type={'number'}

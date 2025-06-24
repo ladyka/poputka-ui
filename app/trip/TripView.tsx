@@ -20,7 +20,7 @@ const TripView = ({trip}: TripViewProps) => {
                 {trip.id === NEW_TRIP_ID && (<h2>Информация о новой поездке</h2>)}
                 <br/>
                 <Typography variant="h5"> Поездка из {trip.from} в {trip.to}</Typography>
-                <Typography>Стоимость: {trip.price} {trip.currency}<br/></Typography>
+                {/* <Typography>Стоимость: {trip.price} {trip.currency}<br/></Typography> */}
                 <Typography>Дата отправления: {dayjs(trip.start).format('YYYY-MM-DD')}</Typography>
                 <Typography>Время отправления: {dayjs(trip.start).format('HH:mm')}</Typography>
                 <Typography>Количество свободных мест для пассажиров: {trip.passengers}</Typography>
