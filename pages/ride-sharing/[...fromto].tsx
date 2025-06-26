@@ -49,12 +49,10 @@ export default function RideSharing() {
 
     let tripsSearchService = useTripsSearchService();
     useEffect(() => {
-        console.log(`${fromPlace} ${toPlace}`)
         if (!((fromPlace === null || fromPlace.trim() === "") || (toPlace === null || toPlace.trim() === ""))) {
             tripsSearchService(fromPlace, toPlace)
                 .then(value => {
-                    console.log(value.data.content)
-                    setTrips(value.data.content)
+                    setTrips(value.data)
                 })
                 .catch(reason => {
                     console.error(reason)
