@@ -12,7 +12,6 @@ import getLPTheme from '@/app/getLPTheme';
 
 import TripView from "@/app/trip/TripView";
 import useTripGetService from "@/app/services/TripService";
-import {TripCompanionEdit} from "@/app/dti/TripCompanionEdit";
 import Container from "@mui/material/Container";
 import {ToggleCustomTheme} from "@/app/customThemeService";
 import {TripCompanionView} from "@/app/dti/TripCompanionView";
@@ -39,14 +38,12 @@ export default function TripIdPage() {
     const [trip, setTrip] = useState<TripCompanionView | null>(null)
 
     useEffect(() => {
-        if ((trip && trip.id > 0) || (tripId === '-1')) {
+        if (trip || (tripId === '-1')) {
             return;
         }
         tripGetService(parseInt(tripId))
             .then(data => {
-                if (data.id > 0) {
-                    setTrip(data);
-                }
+                setTrip(data);
             })
             .catch(reason => {
                 console.error(reason)
@@ -67,8 +64,8 @@ export default function TripIdPage() {
                         pb: {xs: 8, sm: 12},
                     }}
                 >
-                    {trip && trip?.id > 0 && (<TripView trip={trip}/>)}
-                    {(!trip) && (<h2>Поездка не может быть отображена</h2>)}
+                    {trip && (<TripView trip={trip}/>)}
+                    {(!trip) && (<h2>Поездка не может быть отображена или загружается!</h2>)}
                 </Container>
                 <Divider/>
             </Box>
