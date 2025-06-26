@@ -1,55 +1,52 @@
-import Stack from "@mui/material/Stack";
-import {Box, Card, CardContent} from "@mui/material";
-import Typography from "@mui/material/Typography";
+import React, { useEffect, useState } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
-import * as React from "react";
-import {useEffect, useState} from "react";
-import {PopularRoute} from "@/app/dti/PopularRoute";
-import {usePopularRoutesService} from "@/app/services/TripService";
+import { PopularRoute } from "@/app/dti/PopularRoute";
+import { usePopularRoutesService } from "@/app/services/TripService";
+import { Box, Typography } from "@mui/material";
 
-export default function PopularRoutes() {
-    const [popularRoutes, setPopularRoutes] = useState<PopularRoute[]>([])
-    const popularRoutesService = usePopularRoutesService();
+export default function PopularRoutesTable() {
+  const [popularRoutes, setPopularRoutes] = useState<PopularRoute[]>([]);
+  const popularRoutesService = usePopularRoutesService();
 
-    useEffect(() => {
-        popularRoutesService().then(value => {
-            setPopularRoutes(value.data)
-            console.log(value.data)
-        })
-    }, [popularRoutesService]);
+  useEffect(() => {
+    popularRoutesService().then(value => {
+      setPopularRoutes(value.data);
+    });
+  }, [popularRoutesService]);
 
-    return (<Stack spacing={2} useFlexGap sx={{width: {xs: '100%', sm: '70%'}}}>
-        <Stack
-            direction={{xs: 'column', sm: 'row'}}
-            alignSelf="center"
-            spacing={1}
-            useFlexGap
-            sx={{pt: 2, width: {xs: '100%', sm: 'auto'}}}
-        >
-            <Box
-                sx={{
-                    width: {sm: '100%', md: '60%'},
-                    textAlign: {sm: 'left', md: 'center'},
-                }}
+  return (
+    <Box>
+        <Typography variant="h4" color="text.primary">
+            Маршруты, популярные у наших пользователей
+        </Typography>
+        <TableContainer
+            component={Paper}
+            sx={{ mt: 2 }}
             >
-                <Typography component="h2" variant="h4" color="text.primary">
-                    Маршруты, популярные у наших пользователей:
-                </Typography>
-            </Box>
-            {popularRoutes.map((route) => (
-                <Card key={route.placeFrom + '-' + route.placeTo} sx={{
-                    width: '100%',
-                    padding: '10px'
-                }}>
-                    <CardContent>
-                        <Typography variant="h4">
-                            <Link href={'/ride-sharing/' + route.placeFrom + '/' + route.placeTo}>
-                                {route.placeFrom + ' - ' + route.placeTo}
+            <Table aria-label="Popular Routes Table">
+                <TableBody>
+                {popularRoutes.map(route => (
+                    <TableRow key={`${route.placeFrom}-${route.placeTo}`}>  
+                        <TableCell sx={{ borderBottom: "2px solid rgba(247, 248, 250, 1);" }}>
+                            <Link
+                                href={`/ride-sharing/${route.placeFrom}/${route.placeTo}`}  
+                                underline="hover"
+                            >
+                                <Typography variant="h4" textAlign="center">{route.placeFrom} - {route.placeTo}</Typography>
                             </Link>
-                        </Typography>
-                    </CardContent>
-                </Card>
-            ))}
-        </Stack>
-    </Stack>);
+                        </TableCell>
+                    </TableRow>
+                ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    </Box>
+  );
 }

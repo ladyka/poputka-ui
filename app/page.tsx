@@ -40,14 +40,10 @@ const Home = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                pt: { xs: 14, sm: 20 },
-                pb: { xs: 8, sm: 12 },
               }}
           >
               <PopularRoutes/>
           </Container>
-          <Divider />
-
         </Box>
         <Footer />
         <ToggleCustomTheme
