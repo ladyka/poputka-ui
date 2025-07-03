@@ -46,14 +46,14 @@ export default function NewTrip() {
         // currency: "BYN",
         description: "",
         from: {
-            name: "Minsk",
+            name: "Минск",
             osm_id: 59195,
             osm_type: "relation",
         },
         id: NEW_TRIP_ID,
         // price: 20,
         to: {
-            name: "Minsk",
+            name: "Минск",
             osm_id: 59195,
             osm_type: "relation",
         },

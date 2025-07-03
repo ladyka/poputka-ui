@@ -4,7 +4,6 @@ import * as React from 'react';
 import {PaletteMode} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import AppAppBar from '@/app/components/AppAppBar';
 import Footer from '@/app/components/Footer';
@@ -33,7 +32,7 @@ const Home = () => {
       <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
         <CssBaseline />
         <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
-          <SearchForm from_default={'Minsk'} to_default={'Maladzyechna'}/>
+          <SearchForm from_default={'Минск'} to_default={'Молодечно'}/>
         <Box sx={{ bgcolor: 'background.default' }}>
           <Container
               sx={{

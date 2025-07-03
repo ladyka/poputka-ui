@@ -79,7 +79,7 @@ export default function LandingPage() {
         <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
             <CssBaseline/>
             <AppAppBar mode={mode} toggleColorMode={toggleColorMode}/>
-            <SearchForm to_default={'Maladzyechna'} from_default={'Minsk'}/>
+            <SearchForm to_default={'Молодечно'} from_default={'Минск'}/>
             <Box sx={{bgcolor: 'background.default'}}>
                 <LogoCollection/>
                 <Divider/>

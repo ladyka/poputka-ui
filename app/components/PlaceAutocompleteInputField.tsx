@@ -1,8 +1,8 @@
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import * as React from "react";
-import { debounce } from "@mui/material/utils";
-import { Place } from "@/app/dti/place";
+import {debounce} from "@mui/material/utils";
+import {Place} from "@/app/dti/place";
 
 interface PlaceInputFieldProps {
     place: Place;
@@ -10,7 +10,8 @@ interface PlaceInputFieldProps {
     labelText: string;
 }
 
-const lang = navigator.languages?.[0] || navigator.language || "ru";
+// const lang = navigator.languages?.[0] || navigator.language || "ru";
+const lang = "ru";
 
 export default function PlaceAutocompleteInputField({
     place,

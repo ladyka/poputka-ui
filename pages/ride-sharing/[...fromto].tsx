@@ -28,8 +28,8 @@ export default function RideSharing() {
 
     const router = useRouter();
     const {fromto} = router.query;
-    let from = "Minsk"
-    let to = "Minsk"
+    let from = "Минск"
+    let to = "Минск"
     useEffect(() => {
         if (Array.isArray(fromto)) {
             setFromPlace(fromto[0]);
