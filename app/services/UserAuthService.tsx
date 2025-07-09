@@ -1,11 +1,11 @@
 import {apiInstance, instance} from "@/app/services/ApiInstance";
 import {SingUpRequest} from "@/app/dti/SingUpRequest";
 import {UserInfo} from "@/app/dti/UserInfo";
-import { useCallback } from "react";
+import {useCallback} from "react";
 
 export default function useLoginService() {
     return useCallback((data: FormData) => {
-        return instance.post('/login', data)
+        return instance.post('/login', data, {maxRedirects: 0})
     }, [])
 }
 
