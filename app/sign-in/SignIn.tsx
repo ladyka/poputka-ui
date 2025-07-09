@@ -97,7 +97,9 @@ export default function SignIn() {
                 }
             })
             .catch(reason => {
-                console.log(reason);
+                if (reason.response?.status === 302) {
+                    router.push("/");
+                }
                 setOpenInvalidEmailOrPassword(true)
             })
     };
