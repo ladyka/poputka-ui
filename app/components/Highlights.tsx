@@ -35,7 +35,7 @@ const items = [
     icon: <AutoFixHighRoundedIcon />,
     title: 'Innovative functionality',
     description:
-      'Stay ahead with features that set new standards, addressing your evolving needs better than the rest.',
+      'Stay ahead with features that set new standards, addressign your evolving needs better than the rest.',
   },
   {
     icon: <SupportAgentRoundedIcon />,

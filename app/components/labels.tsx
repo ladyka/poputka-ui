@@ -4,8 +4,8 @@ export class Labels {
     static helpFAQ: string = 'help_faq';
     static password: string = 'password';
     static password_forgot: string = 'password_forgot';
-    static sing_in_have_not_account: string = 'sing_in_have_not_account';
-    static singIn: string = 'sing_in';
-    static singUp: string = 'sing_up';
+    static sign_in_have_not_account: string = 'sign_in_have_not_account';
+    static signIn: string = 'sign_in';
+    static signUp: string = 'sign_up';
     static please_enter_a_valid_email_address: string = 'please_enter_a_valid_email_address';
 }

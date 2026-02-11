@@ -17,9 +17,9 @@ import getSignUpInTheme from '../getSignUpInTheme';
 import ToggleColorMode from './ToggleColorMode';
 import {PoputkaByIcon} from '../components/CustomIcons';
 import {ToggleCustomTheme} from "@/app/customThemeService";
-import {useSingUpService} from "@/app/services/UserAuthService";
-import {SingUpRequest} from "@/app/dti/SingUpRequest";
-import SingUpThanks from "@/app/sign-up/SingUpThanks";
+import {useSignUpService} from "@/app/services/UserAuthService";
+import {SignUpRequest} from "@/app/dti/SignUpRequest";
+import SignUpThanks from "@/app/sign-up/SignUpThanks";
 import {useRouter} from "next/navigation";
 
 export default function SignUp() {
@@ -36,7 +36,7 @@ export default function SignUp() {
   const [nameErrorMessage, setNameErrorMessage] = React.useState('');
   const [lastNameError, setLastNameError] = React.useState(false);
   const [lastNameErrorMessage, setLastNameErrorMessage] = React.useState('');
-  const [openSingUpThanks, setOpenSingUpThanks] = useState<boolean>(false)
+  const [openSignUpThanks, setOpenSignUpThanks] = useState<boolean>(false)
 
   const validateInputs = () => {
     const email = document.getElementById('email') as HTMLInputElement;
@@ -94,7 +94,7 @@ export default function SignUp() {
     setShowCustomTheme((prev) => !prev);
   };
 
-  const singUpService = useSingUpService()
+  const signUpService = useSignUpService()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -106,23 +106,23 @@ export default function SignUp() {
       password: data.get('password'),
     });
 
-    const signUpData: SingUpRequest = {
+    const signUpData: SignUpRequest = {
       email: data.get('email') as string,
       password: data.get('password') as string,
       name: data.get('name') as string,
       surname: data.get('lastName') as string,
     };
-    singUpService(signUpData)
+    signUpService(signUpData)
         .then(value => {
           if (value.data.success) {
-            setOpenSingUpThanks(true)
+            setOpenSignUpThanks(true)
           }
         });
   };
 
-  const handleCloseSingUpThanks = () => {
-    setOpenSingUpThanks(false)
-    router.push("/sing-in")
+  const handleCloseSignUpThanks = () => {
+    setOpenSignUpThanks(false)
+    router.push("/sign-in")
   }
   return (
     <ThemeProvider theme={showCustomTheme ? SignUpTheme : defaultTheme}>
@@ -272,8 +272,8 @@ export default function SignUp() {
             {/*<Divider>*/}
             {/*  <Typography color="text.secondary">or</Typography>*/}
             {/*</Divider>*/}
-            <SingUpThanks open={openSingUpThanks}
-                          handleClose={handleCloseSingUpThanks}/>
+            <SignUpThanks open={openSignUpThanks}
+                          handleClose={handleCloseSignUpThanks}/>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               {/*<Button*/}
               {/*  type="submit"*/}

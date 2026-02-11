@@ -1,5 +1,5 @@
 import {apiInstance, instance} from "@/app/services/ApiInstance";
-import {SingUpRequest} from "@/app/dti/SingUpRequest";
+import {SignUpRequest} from "@/app/dti/SignUpRequest";
 import {UserInfo} from "@/app/dti/UserInfo";
 import {useCallback} from "react";
 
@@ -9,9 +9,9 @@ export default function useLoginService() {
     }, [])
 }
 
-export function useSingUpService() {
-    return useCallback((data: SingUpRequest) => {
-        return apiInstance.post('/user/singup', data)
+export function useSignUpService() {
+    return useCallback((data: SignUpRequest) => {
+        return apiInstance.post('/user/signup', data)
     }, [])
 }
 

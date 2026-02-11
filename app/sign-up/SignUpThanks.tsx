@@ -6,12 +6,12 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-interface SingUpThanksProps {
+interface SignUpThanksProps {
     open: boolean;
     handleClose: () => void;
 }
 
-export default function SingUpThanks({open, handleClose}: SingUpThanksProps) {
+export default function SignUpThanks({open, handleClose}: SignUpThanksProps) {
     return (
         <Dialog
             open={open}

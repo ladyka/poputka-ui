@@ -6,6 +6,6 @@
   "password_forgot" : "Forgot your password?",
   "sign_in": "Sign in",
   "sign_up": "Sign up",
-  "sing_in_have_not_account": "Don&apos;t have an account? Sign up",
+  "sign_in_have_not_account": "Don&apos;t have an account? Sign up",
   "please_enter_a_valid_email_address.": "Please enter a valid email address."
 }

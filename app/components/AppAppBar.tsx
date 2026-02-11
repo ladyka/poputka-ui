@@ -66,9 +66,9 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
         switch (label) {
             case Labels.helpFAQ:
                 return "Помощь/FAQ"
-            case Labels.singIn:
+            case Labels.signIn:
                 return "Войти"
-            case Labels.singUp:
+            case Labels.signUp:
                 return "Зарегистрироваться"
             default:
                 return ""
@@ -219,7 +219,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                 href="/sign-in/"
                                 // target="_blank"
                             >
-                                {t(Labels.singIn)}
+                                {t(Labels.signIn)}
                             </Button>)}
                             {!auth && (<Button
                                 color="primary"
@@ -229,7 +229,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                 href="/sign-up/"
                                 // target="_blank"
                             >
-                                {t(Labels.singUp)}
+                                {t(Labels.signUp)}
                             </Button>)}
 
                             {auth && (<Button
@@ -307,7 +307,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                             target="_blank"
                                             sx={{width: '100%'}}
                                         >
-                                            {t(Labels.singUp)}
+                                            {t(Labels.signUp)}
                                         </Button>
                                     </MenuItem>)}
                                     {!auth && (<MenuItem>
@@ -319,7 +319,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                             target="_blank"
                                             sx={{width: '100%'}}
                                         >
-                                            {t(Labels.singIn)}
+                                            {t(Labels.signIn)}
                                         </Button>
                                     </MenuItem>)}
                                     {auth && (<MenuItem>

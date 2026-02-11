@@ -46,9 +46,9 @@ export default function SignIn() {
                 return "Пароль"
             case Labels.password_forgot:
                 return "Забыли свой пароль?"
-            case Labels.sing_in_have_not_account:
+            case Labels.sign_in_have_not_account:
                 return "Нет аккаунта. Зарегистрироваться"
-            case Labels.singIn:
+            case Labels.signIn:
                 return "Войти"
             case Labels.forward_main_page:
                 return "На главную"
@@ -195,7 +195,7 @@ export default function SignIn() {
                             variant="h4"
                             sx={{width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)'}}
                         >
-                            {t(Labels.singIn)}
+                            {t(Labels.signIn)}
                         </Typography>
                         <Box
                             component="form"
@@ -271,14 +271,14 @@ export default function SignIn() {
                                 variant="contained"
                                 onClick={validateInputs}
                             >
-                                {t(Labels.singIn)}
+                                {t(Labels.signIn)}
                             </Button>
                             <Link
                                 href="/sign-up/"
                                 variant="body2"
                                 sx={{alignSelf: 'center'}}
                             >
-                                {t(Labels.sing_in_have_not_account)}
+                                {t(Labels.sign_in_have_not_account)}
                             </Link>
                         </Box>
                         {/*<Divider>or</Divider>*/}
