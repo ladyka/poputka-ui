@@ -5,10 +5,10 @@ If you think that some rule or request is wrong, ask me about it and stop execut
 ## 🎯 General Development Rules
 
 ### Build & Verification
-- **Verification Required**: Run `make verify` before completing any task to ensure all imports work correctly
-- **Testing**: Run `make test-coverage` when modifying core functionality or adding new features
-- **Linting**: Run `make lint` to check code quality (flake8, mypy) before task completion
-- **Formatting**: Use `make format` to ensure consistent code style (black, isort) on modified files
+- **Verification Required**: Run `npm run verify` before completing any task to ensure all imports work correctly
+- **Testing**: Run `npm run test` when modifying core functionality or adding new features
+- **Linting**: Run `npm run lint` to check code quality (flake8, mypy) before task completion
+- **Formatting**: Use `npm run format` to ensure consistent code style (black, isort) on modified files
 
 ### Documentation Maintenance
 - **FUNCTIONALITY.md**: Always update with new features, API changes, configuration changes, or significant refactors
