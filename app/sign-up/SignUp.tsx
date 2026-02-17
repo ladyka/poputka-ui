@@ -17,7 +17,7 @@ import getSignUpInTheme from '../getSignUpInTheme';
 import ToggleColorMode from './ToggleColorMode';
 import {PoputkaByIcon} from '../components/CustomIcons';
 import {ToggleCustomTheme} from "@/app/customThemeService";
-import {useSignUpService} from "@/app/services/UserAuthService";
+import {useSignUpService, useLoginService} from "@/app/services/UserAuthService";
 import {SignUpRequest} from "@/app/dti/SignUpRequest";
 import SignUpThanks from "@/app/sign-up/SignUpThanks";
 import {useRouter} from "next/navigation";
@@ -95,6 +95,7 @@ export default function SignUp() {
   };
 
   const signUpService = useSignUpService()
+  const loginService = useLoginService()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -115,14 +116,24 @@ export default function SignUp() {
     signUpService(signUpData)
         .then(value => {
           if (value.data.success) {
-            setOpenSignUpThanks(true)
+            const loginData = new FormData();
+            loginData.append("username", '' + signUpData.email);
+            loginData.append("password", '' + signUpData.password);
+            loginService(loginData)
+              .then(value => {
+                setOpenSignUpThanks(true)
+                }
+              )
+              .catch(reason => {
+                router.push("/sign-in")
+             })
           }
         });
   };
 
   const handleCloseSignUpThanks = () => {
     setOpenSignUpThanks(false)
-    router.push("/sign-in")
+    router.push("/")
   }
   return (
     <ThemeProvider theme={showCustomTheme ? SignUpTheme : defaultTheme}>

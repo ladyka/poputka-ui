@@ -19,7 +19,7 @@ import getSignUpInTheme from '../getSignUpInTheme';
 import ToggleColorMode from './ToggleColorMode';
 import {PoputkaByIcon} from '../components/CustomIcons';
 import {Labels} from "@/app/components/labels";
-import useLoginService from "@/app/services/UserAuthService";
+import {useLoginService} from "@/app/services/UserAuthService";
 import InvalidEmailOrPassword from "@/app/sign-in/InvalidEmailOrPassword";
 import {useRouter} from "next/navigation";
 import {ToggleCustomTheme} from "@/app/customThemeService";

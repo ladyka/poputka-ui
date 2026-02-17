@@ -3,7 +3,7 @@ import {SignUpRequest} from "@/app/dti/SignUpRequest";
 import {UserInfo} from "@/app/dti/UserInfo";
 import {useCallback} from "react";
 
-export default function useLoginService() {
+export function useLoginService() {
     return useCallback((data: FormData) => {
         return instance.post('/login', data, {maxRedirects: 0})
     }, [])
