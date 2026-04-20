@@ -24,6 +24,7 @@ import getLPTheme from '@/app/getLPTheme';
 import {useGetBookings} from "@/app/services/DialogService";
 import {formatDateLabel, formatTimeLabel} from '../utils/dateFormatters';
 import {useParams, useRouter} from 'next/navigation';
+import {getBookingStatusLabel} from "@/app/utils/bookingStatus";
 
 export default function DialogsLayout({children}: { children: ReactNode }) {
     const [mode, setMode] = useState<PaletteMode>('light');
@@ -65,11 +66,14 @@ export default function DialogsLayout({children}: { children: ReactNode }) {
                                     <Typography>Маршрут: {booking.placeFrom} - {booking.placeTo}</Typography>
                                     <Typography>Дата поездки: {formatDateLabel(booking.start)}</Typography>
                                     <Typography>Время поездки: {formatTimeLabel(booking.start)}</Typography>
-                                    <Typography>Статус бронирования: {booking.bookingStatus.toLowerCase()}</Typography>
+                                    <Typography>
+                                        Статус бронирования: {getBookingStatusLabel(booking.bookingStatus)}
+                                    </Typography>
                                     <Typography>{booking.content}</Typography>
                                 </Box>
                             }
                             primaryTypographyProps={{noWrap: true}}
+                            secondaryTypographyProps={{ component: "div" }}
                         />
                     </ListItem>
                 ))}
