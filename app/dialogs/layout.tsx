@@ -1,6 +1,6 @@
 'use client';
 
-import {ReactNode, useMemo, useState} from 'react';
+import {ReactNode, useEffect, useMemo, useState} from 'react';
 import {
     Box,
     Container,
@@ -25,6 +25,7 @@ import {useGetBookings} from "@/app/services/DialogService";
 import {formatDateLabel, formatTimeLabel} from '../utils/dateFormatters';
 import {useParams, useRouter} from 'next/navigation';
 import {getBookingStatusLabel} from "@/app/utils/bookingStatus";
+import {useUserInfoService} from "@/app/services/UserAuthService";
 
 export default function DialogsLayout({children}: { children: ReactNode }) {
     const [mode, setMode] = useState<PaletteMode>('light');
@@ -34,7 +35,7 @@ export default function DialogsLayout({children}: { children: ReactNode }) {
     const toggleColorMode = () => setMode(prev => prev === 'dark' ? 'light' : 'dark');
 
     const {data, isLoading, error} = useGetBookings();
-    const chatList = useMemo(() => data || [], [data]);
+    const chatList = useMemo(() => (Array.isArray(data) ? data : []), [data]);
 
     const isMobile = useMediaQuery('(max-width:900px)');
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -42,8 +43,30 @@ export default function DialogsLayout({children}: { children: ReactNode }) {
     const closeDrawer = () => setDrawerOpen(false);
 
     const router = useRouter();
+    const userInfoService = useUserInfoService();
     const params = useParams();
     const selectedId = params?.id;
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+
+        userInfoService()
+            .then((res) => {
+                const d = res?.data as unknown;
+                const email = (d && typeof d === "object" && "email" in (d as Record<string, unknown>))
+                    ? (d as { email?: unknown }).email
+                    : undefined;
+
+                if (typeof email === "string" && email.length > 3) return;
+
+                const next = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+                router.replace(`/sign-in?next=${encodeURIComponent(next)}`);
+            })
+            .catch(() => {
+                const next = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+                router.replace(`/sign-in?next=${encodeURIComponent(next)}`);
+            });
+    }, [router, userInfoService]);
 
     const ChatMenu = (
         <Box sx={{width: 250}}>

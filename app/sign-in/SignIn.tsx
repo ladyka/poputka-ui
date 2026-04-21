@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -24,7 +26,7 @@ import InvalidEmailOrPassword from "@/app/sign-in/InvalidEmailOrPassword";
 import {useRouter} from "next/navigation";
 import {ToggleCustomTheme} from "@/app/customThemeService";
 
-export default function SignIn() {
+export default function SignIn({ next }: { next?: string }) {
     const [mode, setMode] = React.useState<PaletteMode>('light');
     const [showCustomTheme, setShowCustomTheme] = React.useState(true);
     const defaultTheme = createTheme({palette: {mode}});
@@ -37,6 +39,33 @@ export default function SignIn() {
     const [openInvalidEmailOrPassword, setOpenInvalidEmailOrPassword] = React.useState(false);
     const loginService = useLoginService()
     const router = useRouter();
+    const getSafeNext = React.useCallback(() => {
+        const fromWindow = (() => {
+            if (typeof window === "undefined") return undefined;
+            const sp = new URLSearchParams(window.location.search);
+            const v = sp.get("next") ?? undefined;
+            return v;
+        })();
+
+        const raw = (typeof next === "string" && next.length > 0) ? next : fromWindow;
+        if (!raw) return "/";
+
+        let candidate = raw.trim();
+        if (!candidate) return "/";
+
+        // Some setups may pass an already URL-encoded value.
+        if (candidate.includes("%")) {
+            try {
+                candidate = decodeURIComponent(candidate);
+            } catch {
+                // keep original
+            }
+        }
+
+        // Only allow relative in-app navigation to avoid open-redirects.
+        if (!candidate.startsWith("/")) return "/";
+        return candidate;
+    }, [next]);
     // const { t } = useTranslation();
     const t = (label: string) => {
         switch (label) {
@@ -89,7 +118,7 @@ export default function SignIn() {
                     if (value.data.indexOf('Bad credentials') > 0) {
                         setOpenInvalidEmailOrPassword(true)
                     } else {
-                        router.push("/");
+                        router.replace(getSafeNext());
                     }
                 } else {
                     setOpenInvalidEmailOrPassword(true)
@@ -98,7 +127,8 @@ export default function SignIn() {
             })
             .catch(reason => {
                 if (reason.response?.status === 302) {
-                    router.push("/");
+                    router.replace(getSafeNext());
+                    return;
                 }
                 setOpenInvalidEmailOrPassword(true)
             })

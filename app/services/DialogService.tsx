@@ -8,7 +8,8 @@ import {Message, MessageCreateDto, MessageDto} from "@/app/dti/Message";
             queryKey: ['bookings'],
             queryFn: async () => {
                 const response = await apiInstance.get(`/booking/`);
-                return response.data;
+                const data = response.data as unknown;
+                return Array.isArray(data) ? (data as Booking[]) : [];
             },
         });
     }
@@ -27,7 +28,8 @@ import {Message, MessageCreateDto, MessageDto} from "@/app/dti/Message";
             queryKey: ['messages', chatId],
             queryFn: async () => {
                 const response = await apiInstance.get(`/booking/messages/${chatId}`);
-                return response.data;
+                const data = response.data as unknown;
+                return Array.isArray(data) ? (data as Message[]) : [];
             },
             enabled: !!chatId,
         });
