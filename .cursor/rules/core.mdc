@@ -1,0 +1,27 @@
+---
+description: Core repo rules for agents
+alwaysApply: true
+---
+
+## Core rules (always)
+
+- **Do not invent facts**. If something is not clearly in the repo, write it as `TODO:` and point to the file(s) to verify.
+- **Search the code first** before changing docs or behavior; follow existing patterns in `app/` and `pages/`.
+- **Run verification** before finishing:
+  - `npm run verify` (repo standard)
+
+## Repo conventions (observed)
+
+- **Routing** uses both Next.js systems:
+  - App Router in `app/` (`app/**/page.tsx`, `app/layout.tsx`)
+  - Pages Router in `pages/`
+- **API access** goes through axios instances in `app/services/ApiInstance.tsx`.
+- **DTO/types** live in `app/dti/`.
+- **Data fetching** uses React Query (`@tanstack/react-query`) with provider in `app/components/ReactQueryProvider.tsx`.
+- **MUI SSR/Emotion** registry is in `app/components/ThemeRegistry.tsx`.
+
+## Safety
+
+- Do not commit secrets (`.env*`, keys, credentials).
+- Be careful with API response shapes used by UI (see `app/dti/*` and `FUNCTIONALITY.md`).
+

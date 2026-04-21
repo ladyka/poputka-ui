@@ -1,0 +1,71 @@
+stages:
+  - test
+  - build-and-deploy-dev
+  - build-and-deploy-prod
+
+cache: &global_cache
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules
+  policy: pull-push
+
+default:
+  image: node:24
+
+test:
+  stage: test
+  cache:
+    <<: *global_cache
+  script:
+    - npm ci
+    - npm run lint
+    - npm run test:coverage
+  coverage: '/Statements\s*:\s*([0-9.]+)%/'
+  artifacts:
+    when: always
+    expire_in: 7 days
+    reports:
+      cobertura: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/
+  only:
+    - main
+    - master
+    - merge_requests
+
+build-and-deploy-dev:
+  stage: build-and-deploy-dev
+  before_script:
+    - set -x
+    - chmod 600 $SSH_KEY_FILE_DEV
+    - export SERVER_SSH_CONNECTION=ubuntu@${HOST_TARGET_DEV}
+    - npm install
+  script:
+    - npm run build ;
+    - tar -cf bundle.tar .
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY_FILE_DEV ${SERVER_SSH_CONNECTION} "rm -fr $WWW_DIR ; mkdir -p $WWW_DIR"
+    - scp -o StrictHostKeyChecking=no -i $SSH_KEY_FILE_DEV ${CI_PROJECT_DIR}/bundle.tar ${SERVER_SSH_CONNECTION}:$WWW_DIR
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY_FILE_DEV ${SERVER_SSH_CONNECTION} "cd $WWW_DIR ; tar -xf bundle.tar"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY_FILE_DEV ${SERVER_SSH_CONNECTION} "sudo systemctl restart ${CI_PROJECT_NAME}.service"
+  only:
+    - main
+    - master
+    - merge_requests
+
+build-and-deploy-prod:
+  stage: build-and-deploy-prod
+  before_script:
+    - set -x
+    - chmod 600 $SSH_KEY_FILE_PROD
+    - export SERVER_SSH_CONNECTION=ubuntu@${HOST_TARGET_PROD}
+    - npm install
+  script:
+    - npm run build ;
+    - tar -cf bundle.tar .
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY_FILE_PROD ${SERVER_SSH_CONNECTION} "rm -fr $WWW_DIR ; mkdir -p $WWW_DIR"
+    - scp -o StrictHostKeyChecking=no -i $SSH_KEY_FILE_PROD ${CI_PROJECT_DIR}/bundle.tar ${SERVER_SSH_CONNECTION}:$WWW_DIR
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY_FILE_PROD ${SERVER_SSH_CONNECTION} "cd $WWW_DIR ; tar -xf bundle.tar"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY_FILE_PROD ${SERVER_SSH_CONNECTION} "sudo systemctl restart ${CI_PROJECT_NAME}.service"
+  only:
+    - tags
+

@@ -1,0 +1,38 @@
+---
+description: React + TypeScript rules for this repo
+globs: ["**/*.{ts,tsx}"]
+---
+
+## Components & hooks
+
+- Use **function components** and React hooks (repo uses React 18).
+- Mark client components with `"use client";` when using hooks like `useState`, `useEffect`, or `useRouter`.
+- For App Router pages, keep server components minimal; pass `searchParams` from `page.tsx` into client components when needed (see `app/sign-in/page.tsx`).
+
+## Styling (MUI)
+
+- Prefer **MUI components** and the `sx` prop for styling.
+- Theme token builders exist:
+  - `app/getLPTheme.tsx`
+  - `app/getSignUpInTheme.tsx`
+  - `app/checkout/getCheckoutTheme.tsx`
+
+## Data fetching (React Query)
+
+- Prefer React Query for server data:
+  - define typed hooks in `app/services/*` using `useQuery`/`useMutation`.
+- Keep query keys stable and explicit (examples in `app/services/DialogService.tsx`).
+
+## HTTP (axios)
+
+- Use `apiInstance` (base `/api`) for backend endpoints and `instance` (base `/`) for `/login`.
+- Auth is cookie-based (`withCredentials: true`).
+- Be aware of the global response interceptor in `app/services/ApiInstance.tsx`:
+  - it can unwrap `data.body`
+  - it can redirect to `/sign-in?next=...` if an HTML sign-in page is returned
+
+## Dates (dayjs)
+
+- `dayjs` is used in multiple components (e.g. trip forms and app bar). Prefer `dayjs` for user-facing date handling where already used.
+- Date formatting helpers also exist in `app/utils/dateFormatters.ts`.
+

@@ -1,4 +1,4 @@
 include:
   - project: ladyka/gitlab-common
-    ref: prod-only
-    file: .gitlab-ci-next_js-service.yml
+    ref: master
+    file: .gitlab-ci-next_js-tests-service.yml
