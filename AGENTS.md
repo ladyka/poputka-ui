@@ -84,3 +84,6 @@ make verify
   - HTML sign-in marker redirect: `app/services/ApiInstance.tsx`
   - Dialogs auth guard: `app/dialogs/layout.tsx`
 
+
+## Before finish
+In the end of each task, always update tests and relevant documentation (or leave a `TODO:` with exact files/sections if it must be deferred).

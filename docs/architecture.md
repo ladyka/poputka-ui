@@ -45,6 +45,24 @@ Pattern used in pages:
 - create theme via `createTheme(getLPTheme(mode))`
 - render with `<ThemeProvider theme={...}>`
 
+## Page "shell" / app frame (AppBar + Footer + theme)
+
+Some App Router pages are implemented with a **client-side shell** that provides the common app frame:
+
+- `ThemeProvider` + `CssBaseline`
+- `AppAppBar`
+- background gradient + `Container` paddings
+- `Footer`
+- `ToggleCustomTheme`
+
+Reference implementation:
+- `app/trip/[id]/page.tsx`
+- `app/user/[userId]/UserProfileShell.tsx`
+
+Recommendation:
+- keep `app/<route>/page.tsx` minimal (parse/validate params, render shell)
+- put the actual feature UI into a separate client component (e.g. `UserProfilePage`) so it can be reused/tested without duplicating the app frame
+
 ## Data fetching & caching (React Query)
 
 - React Query is used for API hooks in `app/services/*` (example: `useGetBookings()` in `app/services/DialogService.tsx`).

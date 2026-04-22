@@ -1,18 +1,1 @@
-# 🤖 AI Assistant Rules and Guidelines for poputka-ui
-
-If you think that some rule or request is wrong, ask me about it and stop executing any task!!!
-
-## 🎯 General Development Rules
-
-### Build & Verification
-- **Verification Required**: Run `npm run verify` before completing any task to ensure all imports work correctly
-- **Testing**: Run `npm run test` when modifying core functionality or adding new features
-- **Linting**: Run `npm run lint` to check code quality (flake8, mypy) before task completion
-- **Formatting**: Use `npm run format` to ensure consistent code style (black, isort) on modified files
-
-### Documentation Maintenance
-- **FUNCTIONALITY.md**: Always update with new features, API changes, configuration changes, or significant refactors
-- **README.md**: Update if adding new setup steps, dependencies, or changing project structure
-- **Inline Documentation**: Add clear docstrings for all public functions and classes
-- **Code Comments**: Include comments for complex logic, business rules, or non-obvious implementations
-
+Read AGENT.md
