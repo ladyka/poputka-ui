@@ -16,8 +16,6 @@ import { useCreateTripBookingReview, useMyTripBookingReview } from "@/app/servic
 
 function statusLabel(status: TripBookingReviewStatus): string {
   switch (status) {
-    case "DRAFT":
-      return "Черновик";
     case "PENDING_MODERATION":
       return "На модерации";
     case "APPROVED":
@@ -37,7 +35,7 @@ export function TripBookingReviewEditor({
   disabled?: boolean;
 }) {
   const queryClient = useQueryClient();
-  const { data, isLoading, isError, error, refetch, isFetching } = useMyTripBookingReview(bookingId);
+  const { data, isLoading, isError, error, isFetching } = useMyTripBookingReview(bookingId);
   const createMutation = useCreateTripBookingReview(bookingId);
 
   const reviewId = data?.review?.id;
@@ -75,6 +73,33 @@ export function TripBookingReviewEditor({
 
   const review = data?.review;
   const canSubmit = !!bookingId && !disabled && rating !== null && rating >= 1 && rating <= 5;
+
+  const reviewMetaText = (() => {
+    if (!review) return null;
+
+    if (review.canEdit) {
+      if (typeof review.editableUntil === "number") {
+        const until = dayjs(review.editableUntil);
+        const mins = until.diff(dayjs(), "minute");
+        if (Number.isFinite(mins) && mins > 0) {
+          if (mins < 60) {
+            return `Вы можете отредактировать отзыв ещё примерно ${mins} мин.`;
+          }
+          const hours = Math.round(mins / 60);
+          return `Вы можете отредактировать отзыв ещё примерно ${hours} ч.`;
+        }
+        return `Вы можете отредактировать отзыв до ${until.format("DD.MM.YYYY HH:mm")}.`;
+      }
+      return "Вы можете отредактировать отзыв.";
+    }
+
+    // Avoid exposing internal "draft" wording to users.
+    if (review.status === "DRAFT") {
+      return null;
+    }
+
+    return `Статус: ${statusLabel(review.status)}`;
+  })();
 
   const handleSubmit = () => {
     if (!canSubmit || rating === null) return;
@@ -123,12 +148,14 @@ export function TripBookingReviewEditor({
 
         {!isLoading && !isError && data?.hasReview && review && (
           <Stack spacing={0.5}>
-            <Typography variant="body2" color="text.secondary">
-              Статус: {statusLabel(review.status)}
-            </Typography>
-            {typeof review.editableUntil === "number" && (
+            {reviewMetaText && (
+              <Typography variant="body2" color="text.secondary">
+                {reviewMetaText}
+              </Typography>
+            )}
+            {review.canEdit && typeof review.editableUntil === "number" && (
               <Typography variant="caption" color="text.secondary">
-                Редактирование до: {dayjs(review.editableUntil).format("DD.MM.YYYY HH:mm")}
+                До: {dayjs(review.editableUntil).format("DD.MM.YYYY HH:mm")}
               </Typography>
             )}
             {review.moderatorComment && review.moderatorComment.trim().length > 0 && (
@@ -174,10 +201,6 @@ export function TripBookingReviewEditor({
             }
           >
             {!data?.hasReview ? "Отправить отзыв" : review?.canEdit ? "Сохранить изменения" : "Отзыв отправлен"}
-          </Button>
-
-          <Button variant="text" onClick={() => refetch()} disabled={isFetching}>
-            Обновить
           </Button>
         </Stack>
       </Stack>

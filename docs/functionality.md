@@ -18,3 +18,6 @@
     - `?review=1&bookingId=<bookingId>`
   - **UI**: `app/trip/[id]/page.tsx` + shared editor `app/components/TripBookingReviewEditor.tsx`
 
+Notes (UX):
+- The review UI avoids exposing the internal **`DRAFT`** state wording to end users; when editing is allowed, it prefers messaging about the remaining edit window (based on `editableUntil` when present).
+
