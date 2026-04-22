@@ -15,6 +15,7 @@ This repo currently uses **both** Next.js routing systems:
 - `/dialogs` → `app/dialogs/page.tsx`
 - `/dialogs/[id]` → `app/dialogs/[id]/page.tsx`
 - `/trip/[id]` → `app/trip/[id]/page.tsx`
+- `/user/[userId]` → `app/user/[userId]/page.tsx`
 
 Root layout (providers): `app/layout.tsx`
 

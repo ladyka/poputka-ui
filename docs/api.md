@@ -51,6 +51,8 @@ Most backend access is implemented as small services/hooks in `app/services/*`:
   - `GET /api/user/info`
   - `POST /api/user/signup`
   - `POST /api/user/update`
+- Trip booking reviews: `app/services/TripBookingReviewService.tsx`
+  - `GET /api/trip-booking-review/users/{userId}`
 
 ## DTOs / typing
 
