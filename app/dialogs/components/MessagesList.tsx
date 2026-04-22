@@ -9,6 +9,7 @@ import {Booking} from "@/app/dti/Booking";
 import Link from "@mui/material/Link";
 import {useQueryClient} from "@tanstack/react-query";
 import {bookingStatusLabel, getBookingStatusLabel} from "@/app/utils/bookingStatus";
+import { TripBookingReviewEditor } from "@/app/components/TripBookingReviewEditor";
 
 type Props = {
     booking: Booking;
@@ -160,6 +161,10 @@ export default function MessagesList({booking}: Props) {
     };
 
     const availableStatuses = availableStatusesResponse?.available ?? [];
+    const tripHref =
+        booking.bookingStatus === "COMPLETED"
+            ? `/trip/${booking.tripId}?review=1&bookingId=${encodeURIComponent(booking.bookingId)}`
+            : `/trip/${booking.tripId}`;
     const handleChangeStatus = (to: string) => {
         if (!booking.bookingId) return;
         changeStatusMutation.mutate(
@@ -214,8 +219,10 @@ export default function MessagesList({booking}: Props) {
                         position: "relative"
                     }}>
                         <Typography variant="h6" noWrap>
-                            {booking.oppositeUserName} <Link
-                            href={'/trip/' + booking.tripId}>{booking.placeFrom} - {booking.placeTo}</Link>
+                            {booking.oppositeUserName}{" "}
+                            <Link href={tripHref}>
+                                {booking.placeFrom} - {booking.placeTo}
+                            </Link>
                         </Typography>
                     </Box>
                 </Box>
@@ -390,6 +397,22 @@ export default function MessagesList({booking}: Props) {
                             {bookingStatusLabel[status] ?? status}
                         </Button>
                     ))}
+                </Box>
+            )}
+
+            {booking.bookingStatus === "COMPLETED" && (
+                <Box sx={{mt: 2, p: 2, borderRadius: 2, bgcolor: "background.paper", border: "1px solid #e6e6e6"}}>
+                    <Box sx={{display: "flex", flexDirection: "column", gap: 1, mb: 1}}>
+                        <Typography variant="subtitle2">
+                            Поездка завершена — можете оставить отзыв.
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            Также можно открыть{" "}
+                            <Link href={tripHref}>страницу поездки</Link>
+                            {" "}и оставить отзыв там.
+                        </Typography>
+                    </Box>
+                    <TripBookingReviewEditor bookingId={booking.bookingId} />
                 </Box>
             )}
         </>
