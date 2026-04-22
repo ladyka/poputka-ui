@@ -56,6 +56,8 @@ Most backend access is implemented as small services/hooks in `app/services/*`:
   - `GET /api/trip-booking-review/booking/{bookingId}/me`
   - `POST /api/trip-booking-review/booking/{bookingId}`
   - `PATCH /api/trip-booking-review/{reviewId}`
+  - `GET /api/trip-booking-review/moderation/pending`
+  - `PUT /api/trip-booking-review/moderation/{reviewId}`
 
 ## DTOs / typing
 

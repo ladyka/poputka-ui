@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { normalizeTripBookingReviewMe, normalizeTripBookingReviewPublicPage } from "./tripBookingReviewNormalize";
+import {
+  normalizeTripBookingReviewMe,
+  normalizeTripBookingReviewModerationPage,
+  normalizeTripBookingReviewPublicPage,
+} from "./tripBookingReviewNormalize";
 
 describe("tripBookingReviewNormalize", () => {
   it("normalizeTripBookingReviewMe returns empty review when hasReview=false", () => {
@@ -51,6 +55,20 @@ describe("tripBookingReviewNormalize", () => {
 
   it("normalizeTripBookingReviewPublicPage defaults missing fields", () => {
     expect(normalizeTripBookingReviewPublicPage({})).toEqual({
+      totalElements: 0,
+      totalPages: 1,
+      size: 0,
+      content: [],
+      number: 0,
+      numberOfElements: 0,
+      first: true,
+      last: true,
+      empty: true,
+    });
+  });
+
+  it("normalizeTripBookingReviewModerationPage defaults missing fields", () => {
+    expect(normalizeTripBookingReviewModerationPage({})).toEqual({
       totalElements: 0,
       totalPages: 1,
       size: 0,

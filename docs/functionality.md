@@ -21,3 +21,11 @@
 Notes (UX):
 - The review UI avoids exposing the internal **`DRAFT`** state wording to end users; when editing is allowed, it prefers messaging about the remaining edit window (based on `editableUntil` when present).
 
+## Admin: trip booking review moderation
+
+- **Route**: `/admin/trips/reviews` (App Router: `app/admin/trips/reviews/page.tsx`)
+- **Purpose**: review moderation queue + approve/reject actions for trip booking reviews
+- **API**:
+  - `GET /api/trip-booking-review/moderation/pending`
+  - `PUT /api/trip-booking-review/moderation/{reviewId}`
+

@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react';
-import {PaletteMode} from '@mui/material';
+import {PaletteMode, Typography} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
@@ -13,6 +13,7 @@ import Container from "@mui/material/Container";
 import SearchForm from '@/app/components/SearchForm';
 import {ToggleCustomTheme} from "@/app/customThemeService";
 import PopularRoutes from "@/app/components/PopularRoutes";
+import Link from "@mui/material/Link";
 
 const Home = () => {
   const [mode, setMode] = React.useState<PaletteMode>('light');

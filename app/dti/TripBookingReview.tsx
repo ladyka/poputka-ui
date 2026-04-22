@@ -49,3 +49,34 @@ export interface TripBookingReviewMeResponseDto {
   review?: TripBookingReviewItemDto;
 }
 
+export type TripBookingReviewModerationDecision = "APPROVE" | "REJECT";
+
+export interface TripBookingReviewModerationRequestDto {
+  decision: TripBookingReviewModerationDecision;
+  moderatorComment?: string;
+}
+
+export interface TripBookingReviewModerationListItemDto {
+  id: number;
+  bookingId: string;
+  reviewerId: number;
+  reviewerUsername?: string;
+  revieweeId: number;
+  status: TripBookingReviewStatus;
+  rating: number;
+  comment?: string;
+  createdAt?: number;
+}
+
+export interface PageTripBookingReviewModerationListItemDto {
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  content: TripBookingReviewModerationListItemDto[];
+  number: number;
+  numberOfElements: number;
+  first: boolean;
+  last: boolean;
+  empty: boolean;
+}
+

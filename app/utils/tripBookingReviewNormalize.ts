@@ -1,4 +1,5 @@
 import type {
+  PageTripBookingReviewModerationListItemDto,
   PageTripBookingReviewPublicListItemDto,
   TripBookingReviewItemDto,
   TripBookingReviewMeResponseDto,
@@ -8,6 +9,25 @@ import type {
 export function normalizeTripBookingReviewPublicPage(data: unknown): PageTripBookingReviewPublicListItemDto {
   const obj = (data ?? {}) as Partial<PageTripBookingReviewPublicListItemDto> & { content?: unknown };
   const content = Array.isArray(obj.content) ? (obj.content as PageTripBookingReviewPublicListItemDto["content"]) : [];
+
+  return {
+    totalElements: typeof obj.totalElements === "number" ? obj.totalElements : content.length,
+    totalPages: typeof obj.totalPages === "number" ? obj.totalPages : 1,
+    size: typeof obj.size === "number" ? obj.size : content.length,
+    content,
+    number: typeof obj.number === "number" ? obj.number : 0,
+    numberOfElements: typeof obj.numberOfElements === "number" ? obj.numberOfElements : content.length,
+    first: typeof obj.first === "boolean" ? obj.first : true,
+    last: typeof obj.last === "boolean" ? obj.last : true,
+    empty: typeof obj.empty === "boolean" ? obj.empty : content.length === 0,
+  };
+}
+
+export function normalizeTripBookingReviewModerationPage(data: unknown): PageTripBookingReviewModerationListItemDto {
+  const obj = (data ?? {}) as Partial<PageTripBookingReviewModerationListItemDto> & { content?: unknown };
+  const content = Array.isArray(obj.content)
+    ? (obj.content as PageTripBookingReviewModerationListItemDto["content"])
+    : [];
 
   return {
     totalElements: typeof obj.totalElements === "number" ? obj.totalElements : content.length,
