@@ -24,7 +24,7 @@ export function ToggleCustomTheme({
                 bottom: 24,
             }}
         >
-            <ToggleButtonGroup
+            {/* <ToggleButtonGroup
                 color="primary"
                 exclusive
                 value={showCustomTheme}
@@ -44,7 +44,7 @@ export function ToggleCustomTheme({
                 <ToggleButton value={false}>
                     Дизайн 2
                 </ToggleButton>
-            </ToggleButtonGroup>
+            </ToggleButtonGroup> */}
         </Box>
     );
 }

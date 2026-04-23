@@ -21,6 +21,11 @@ This file is a **map of the repo** and a short set of rules for making changes s
   - `pages/trip.tsx` → `/trip` (Pages Router)
   - `pages/ride-sharing/[...fromto].tsx` → `/ride-sharing/*` (catch-all)
 
+
+### API
+
+[baskend-api-docs.json](baskend-api-docs.json)
+
 ### API client (axios) and services
 
 - Axios instances + global response interceptor: `app/services/ApiInstance.tsx`
@@ -83,7 +88,23 @@ make verify
 - **Do not remove auth redirect behavior** without updating protected routes:
   - HTML sign-in marker redirect: `app/services/ApiInstance.tsx`
   - Dialogs auth guard: `app/dialogs/layout.tsx`
+- **Do not put Vitest tests in `pages/`**:
+  - Avoid `pages/**/*.test.tsx` / `pages/**/*.spec.tsx` — Next.js can treat them as route modules and `next build` will fail.
+  - Put tests in `test/` or next to components (e.g. `app/**/Component.test.tsx`).
 
 
 ## Before finish
 In the end of each task, always update tests and relevant documentation (or leave a `TODO:` with exact files/sections if it must be deferred).
+
+Also, at the end of each task:
+
+- Propose a **ready-to-use commit message** summarizing the change.
+- Include a quick command the developer can run, e.g.:
+
+```bash
+git commit -a -m "<message>"
+```
+
+Notes:
+- Do **not** commit secrets (`.env*`, keys, credentials).
+- Prefer a message that describes **why** the change was made (not only what changed).
