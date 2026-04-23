@@ -54,9 +54,16 @@ npm run verify
 Vitest ищет тесты по шаблону:
 - `**/*.{test,spec}.{ts,tsx}`
 
+### Важно про Next.js `pages/`
+
+- **Нельзя** хранить `*.test.tsx` / `*.spec.tsx` внутри `pages/`.
+  - Next.js Pages Router воспринимает файлы в `pages/` как страницы/модули роутинга и `next build` ломается на тестовых файлах.
+  - **Правильно**: класть тесты в `test/` (например, `test/profilePage.test.tsx`) или рядом с компонентом в `app/**` (например, `app/components/**/Component.test.tsx`).
+
 Примеры, которые уже есть:
 - `app/utils/dateFormatters.test.ts` (unit)
 - `app/sign-in/SignIn.test.tsx` (component)
+ - `test/profilePage.test.tsx` (страница профиля: Tabs)
 
 ## Окружение тестов
 
