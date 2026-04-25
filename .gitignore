@@ -38,8 +38,4 @@ next-env.d.ts
 #IDE
 .idea/
 
-<<<<<<< HEAD
 baskend-api-docs.json
-=======
-./backend-api-docs.json
->>>>>>> edb14a4 (Документация и тесты.)

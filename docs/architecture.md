@@ -45,7 +45,6 @@ Pattern used in pages:
 - create theme via `createTheme(getLPTheme(mode))`
 - render with `<ThemeProvider theme={...}>`
 
-<<<<<<< HEAD
 ## Page "shell" / app frame (AppBar + Footer + theme)
 
 Some App Router pages are implemented with a **client-side shell** that provides the common app frame:
@@ -64,8 +63,6 @@ Recommendation:
 - keep `app/<route>/page.tsx` minimal (parse/validate params, render shell)
 - put the actual feature UI into a separate client component (e.g. `UserProfilePage`) so it can be reused/tested without duplicating the app frame
 
-=======
->>>>>>> edb14a4 (Документация и тесты.)
 ## Data fetching & caching (React Query)
 
 - React Query is used for API hooks in `app/services/*` (example: `useGetBookings()` in `app/services/DialogService.tsx`).

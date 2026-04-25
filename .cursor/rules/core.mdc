@@ -7,10 +7,7 @@ alwaysApply: true
 
 - **Do not invent facts**. If something is not clearly in the repo, write it as `TODO:` and point to the file(s) to verify.
 - **Search the code first** before changing docs or behavior; follow existing patterns in `app/` and `pages/`.
-<<<<<<< HEAD
 - **After changes**: always update **tests** and **documentation** relevant to the change (or add `TODO:` with exact files/sections if it must be deferred).
-=======
->>>>>>> edb14a4 (Документация и тесты.)
 - **Run verification** before finishing:
   - `npm run verify` (repo standard)
 

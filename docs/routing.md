@@ -15,11 +15,8 @@ This repo currently uses **both** Next.js routing systems:
 - `/dialogs` → `app/dialogs/page.tsx`
 - `/dialogs/[id]` → `app/dialogs/[id]/page.tsx`
 - `/trip/[id]` → `app/trip/[id]/page.tsx`
-<<<<<<< HEAD
 - `/user/[userId]` → `app/user/[userId]/page.tsx`
 - `/admin/trips/reviews` → `app/admin/trips/reviews/page.tsx`
-=======
->>>>>>> edb14a4 (Документация и тесты.)
 
 Root layout (providers): `app/layout.tsx`
 
@@ -50,10 +47,6 @@ TODO: confirm whether other routes are intended to be protected (search for `use
 ### Post-login return (next)
 
 `/sign-in` supports returning back to the originally requested URL:
-<<<<<<< HEAD
 - `app/sign-in/page.tsx` reads `searchParams.next` (via `await searchParams` in Next.js 16) and passes it to the client component.
-=======
-- `app/sign-in/page.tsx` reads `searchParams.next` and passes it to the client component.
->>>>>>> edb14a4 (Документация и тесты.)
 - `app/sign-in/SignIn.tsx` uses `router.replace(next)` after successful login (only for relative paths starting with `/`).
 
