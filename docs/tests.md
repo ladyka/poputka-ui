@@ -54,6 +54,7 @@ npm run verify
 Vitest ищет тесты по шаблону:
 - `**/*.{test,spec}.{ts,tsx}`
 
+<<<<<<< HEAD
 ### Важно про Next.js `pages/`
 
 - **Нельзя** хранить `*.test.tsx` / `*.spec.tsx` внутри `pages/`.
@@ -64,6 +65,11 @@ Vitest ищет тесты по шаблону:
 - `app/utils/dateFormatters.test.ts` (unit)
 - `app/sign-in/SignIn.test.tsx` (component)
  - `test/profilePage.test.tsx` (страница профиля: Tabs)
+=======
+Примеры, которые уже есть:
+- `app/utils/dateFormatters.test.ts` (unit)
+- `app/sign-in/SignIn.test.tsx` (component)
+>>>>>>> edb14a4 (Документация и тесты.)
 
 ## Окружение тестов
 

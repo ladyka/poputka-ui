@@ -83,11 +83,14 @@ Used in `.gitlab-ci-next_js-tests-service.yml`:
 - **`docs/`**: project documentation (tests, architecture, API, routing)
 - **`test/`**: Vitest setup (`test/setup.ts`)
 
+<<<<<<< HEAD
 Key docs:
 - `docs/functionality.md`
 - `docs/routing.md`
 - `docs/api.md`
 
+=======
+>>>>>>> edb14a4 (Документация и тесты.)
 ## Troubleshooting
 
 - **Redirect loop / unexpected HTML from API**: axios response interceptor checks for an HTML marker (`<h2>Please sign in</h2>`) and redirects to `/sign-in?next=...`. See `app/services/ApiInstance.tsx`.
