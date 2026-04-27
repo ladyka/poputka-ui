@@ -119,5 +119,5 @@ The chat UI detects `GEO:` messages and renders an OpenStreetMap preview + a lin
    - For protected pages, also consider a route-level guard (example: `app/dialogs/layout.tsx`).
 4. **Add a test**:
    - Unit test for pure mappers/formatters
-   - Component/integration test for UI behavior (see `docs/tests.md`)
+   - Component/integration test for UI behavior (see `wiki/tests.md`)
 

@@ -83,7 +83,7 @@ make verify
 
 - **Do not commit secrets**: `.env*`, private keys, credentials, or any generated deployment bundles.
 - **Be careful with API response shapes**: UI expects specific DTOs from `app/dti/*`.
-  - Example: chat message text is in `payload.text` (see `docs/api.md` → “Dialogs / booking chat contract”).
+  - Example: chat message text is in `payload.text` (see `wiki/api.md` → “Dialogs / booking chat contract”).
 - **Do not remove auth redirect behavior** without updating protected routes:
   - HTML sign-in marker redirect: `app/services/ApiInstance.tsx`
   - Dialogs auth guard: `app/dialogs/layout.tsx`

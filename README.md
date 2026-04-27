@@ -52,7 +52,7 @@ make coverage
 make verify
 ```
 
-More details: `docs/tests.md`.
+More details: `wiki/tests.md`.
 
 ## Environment variables
 
@@ -80,13 +80,13 @@ Used in `.gitlab-ci-next_js-tests-service.yml`:
   - `app/services/`: axios clients and API-facing hooks/services
   - `app/dti/`: DTO/type definitions used by UI and services
 - **`pages/`**: legacy Next.js Pages Router routes (`/blog`, `/faq`, etc.)
-- **`docs/`**: project documentation (tests, architecture, API, routing)
+- **`wiki/`**: project documentation (tests, architecture, API, routing)
 - **`test/`**: Vitest setup (`test/setup.ts`)
 
 Key docs:
-- `docs/functionality.md`
-- `docs/routing.md`
-- `docs/api.md`
+- `wiki/functionality.md`
+- `wiki/routing.md`
+- `wiki/api.md`
 
 ## Troubleshooting
 
